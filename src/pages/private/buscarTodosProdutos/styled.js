@@ -32,6 +32,7 @@ export const Table = styled.table`
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
+    margin: 20px;
 
     th, td {
         padding: 12px;
@@ -62,6 +63,7 @@ export const BoxHeader = styled.div`
     justify-content: end;
     width: 100%;
     gap: 10px;
+    margin-right: 15px;
 `
 
 export const BoxIcon = styled.div`

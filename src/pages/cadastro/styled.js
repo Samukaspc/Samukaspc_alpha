@@ -24,7 +24,7 @@ export const BoxButton = styled.div`
         border: 1px solid #000;
         border-radius: 10px;
         cursor: pointer;
-        width: 325px;
+        width: 150px;
         justify-content: center;
     }
 `

@@ -33,7 +33,6 @@ export default function Cadastro() {
             delete data.confirmPassword;
         }
 
-        // Envio dos dados
         try {
             const response = await axios.post('https://interview.t-alpha.com.br/api/auth/register', data);
             alert('Cadastro realizado com sucesso');
@@ -47,7 +46,7 @@ export default function Cadastro() {
     return (
         <Container>
             <form onSubmit={handleSubmit}>
-                <h1>Informação de cadastro</h1>
+                <h1>Cadastrar usuário</h1>
                 <Box>
                     <BoxStart>
                         <span>Nome completo</span>

@@ -3,12 +3,15 @@ import axios from "axios";
 import { BoxHeader, BoxIcon, Container, Table } from "./styled";
 import { MdOutlineDelete } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
+import Modal from "../../../component";
+import Cadastro from "../../cadastro";
 
 export default function BuscarTodosProdutos() {
     const [produtos, setProdutos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [produtoId, setProdutoId] = useState('');
+
 
     const buscarProdutos = async () => {
         try {
@@ -96,11 +99,6 @@ export default function BuscarTodosProdutos() {
         );
     }
 
-    const handleCriarProduto = () => {
-        console.log('chamou a função de criar produto') 
-    }
-
-
 
     const deletarProduto = async (id) => {
         console.log('chamou a função de deletar produto', id);
@@ -115,12 +113,6 @@ export default function BuscarTodosProdutos() {
             console.error('Erro ao deletar produto:', error);
         }
     }
-    
-
-    const editarProduto = async (id) => {
-        console.log('chamou a função de editar produto',id)
-    }
-
 
     return (
         <Container>
@@ -132,7 +124,7 @@ export default function BuscarTodosProdutos() {
                     onChange={(e) => setProdutoId(e.target.value)}
                 />
                 <button onClick={handleBuscarProduto}>Buscar Produto</button>
-                <button onClick={handleCriarProduto}>Cadastrar produto</button>
+                <button >Cadastrar produto</button>
 
             </BoxHeader>
 
@@ -160,7 +152,7 @@ export default function BuscarTodosProdutos() {
                                     <div>
                                         <MdOutlineDelete color={'red'} size={40} onClick={() => deletarProduto(produto.id)} />
                                     </div>
-                                    <FaRegEdit size={30} color={'blue'} onClick={() => editarProduto(produto.id)} />
+                                    <FaRegEdit size={30} color={'blue'}  />
                                 </BoxIcon>
                             </td>
                         </tr>
