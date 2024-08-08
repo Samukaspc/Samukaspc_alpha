@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, BoxButton,  BoxStart, Container } from "./styled";
+import { Box, BoxButton,  BoxCadastro,  BoxStart, Container } from "./styled";
 import logo from "../../image/login.png";
 import axios from 'axios';
 import {  useNavigate } from 'react-router-dom';
@@ -56,6 +56,10 @@ export default function Login() {
                     <BoxButton>
                         <button type="submit" >Login</button>
                     </BoxButton>
+                    <BoxCadastro>
+                        <span>Ainda não possui cadastro? </span>
+                        <a href="/cadastro">Clique aqui e cadastre-se</a>
+                    </BoxCadastro>
                 </Box>
             </form>
         </Container>
