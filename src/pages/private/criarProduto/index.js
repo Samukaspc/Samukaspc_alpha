@@ -75,7 +75,9 @@ export default function CriarProduto() {
                     </BoxStart>
                 </Box>
                 <BoxButton>
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit">Salvar</button>
+                    <button type="submit">Salvar e sair</button>
+
                 </BoxButton>
             </form>
         </Container>

@@ -17,17 +17,19 @@ export const ModalBox = styled.div`
     transform: translate(-50%, -50%);
     background-color: white;
     border-radius: 5px;
-    z-index: 1001;
+    z-index: 999;
     display: flex;
     flex-direction: column;
-    max-width: 800px;
-    width: 100%;
-`
+    padding: 20px;
+    `
 export const BoxSvg = styled.div`
+    padding: 10px;
     display: flex;
     justify-content: end;
-    width: 100%;
     position: absolute;
+    right: 10px;
+    top: 5px;
+    
     svg {
         cursor: pointer;
         &:hover {

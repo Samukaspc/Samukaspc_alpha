@@ -72,4 +72,14 @@ export const BoxIcon = styled.div`
     align-items: center;
 `
 
+export const BoxButton = styled.button`
+    display: flex;
+    background-color: #4574a1 !important;
+    width: 40px !important;
+    height: 40px !important;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    `
+
 

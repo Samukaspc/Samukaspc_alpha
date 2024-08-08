@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { BoxHeader, BoxIcon, Container, Table } from "./styled";
+import { BoxButton, BoxHeader, BoxIcon, Container, Table } from "./styled";
 import { MdOutlineDelete } from "react-icons/md";
-import { FaRegEdit } from "react-icons/fa";
 import Modal from "../../../component";
-import Cadastro from "../../cadastro";
+import CriarProduto from "../criarProduto";
+import { TbEdit } from "react-icons/tb";
 
 export default function BuscarTodosProdutos() {
     const [produtos, setProdutos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [produtoId, setProdutoId] = useState('');
+    const [openModal, setOpenModal] = useState(false);
 
 
     const buscarProdutos = async () => {
@@ -124,7 +125,7 @@ export default function BuscarTodosProdutos() {
                     onChange={(e) => setProdutoId(e.target.value)}
                 />
                 <button onClick={handleBuscarProduto}>Buscar Produto</button>
-                <button >Cadastrar produto</button>
+                <button onClick={() => setOpenModal(true)}>Cadastrar produto</button>
 
             </BoxHeader>
 
@@ -152,13 +153,18 @@ export default function BuscarTodosProdutos() {
                                     <div>
                                         <MdOutlineDelete color={'red'} size={40} onClick={() => deletarProduto(produto.id)} />
                                     </div>
-                                    <FaRegEdit size={30} color={'blue'}  />
+                                    <BoxButton>
+                                        <TbEdit size={20} />
+                                    </BoxButton>
                                 </BoxIcon>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
+            <Modal isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} width={600} >
+                <CriarProduto />
+            </Modal>
         </Container>
     );
 }

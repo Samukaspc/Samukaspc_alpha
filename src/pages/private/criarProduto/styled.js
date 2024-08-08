@@ -4,14 +4,11 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    width: 100%;
-    height: 100vh;
     justify-content: center;
     a {
         text-decoration: none;
         color: blue;
     }
-    
 `
 
 export const Box = styled.div`
@@ -49,10 +46,9 @@ export const BoxButton = styled.div`
         margin: 5px;
         background-color: blue;
         color: #fff;
-        border: 1px solid #000;
         border-radius: 10px;
         cursor: pointer;
-        width: 325px;
+        width: 150px;
         justify-content: center;
     }
  `
