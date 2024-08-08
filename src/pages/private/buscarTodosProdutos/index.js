@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { BoxButton, BoxHeader, BoxIcon, Container, Table } from "./styled";
-import { MdOutlineDelete } from "react-icons/md";
-import Modal from "../../../component";
-import CriarProduto from "../criarProduto";
-import { TbEdit } from "react-icons/tb";
+import React, { useEffect, useState } from 'react';
+import { BoxButton, BoxHeader, BoxIcon, Container, Table } from './styled';
+import { MdOutlineDelete } from 'react-icons/md';
+import Modal from '../../../component';
+import CriarProduto from '../criarProduto';
+import AtualizarProduto from '../atualizarProduto';
+import { TbEdit } from 'react-icons/tb';
+import { buscarProdutoId, buscarProdutos, deletarProduto } from '../../../service';
 
 export default function BuscarTodosProdutos() {
     const [produtos, setProdutos] = useState([]);
@@ -12,52 +13,28 @@ export default function BuscarTodosProdutos() {
     const [error, setError] = useState(null);
     const [produtoId, setProdutoId] = useState('');
     const [openModal, setOpenModal] = useState(false);
+    const [vizualizarModal, setVizualizarModal] = useState('');
+    const [dataProduto, setDataProduto] = useState({});
+    const token = localStorage.getItem('token');
 
-
-    const buscarProdutos = async () => {
+    const handleBuscarProdutos = async () => {
         try {
-            const response = await axios.get('https://interview.t-alpha.com.br/api/products/get-all-products', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            console.log('Dados recebidos:', response.data);
-
-            if (response.data && response.data.data && Array.isArray(response.data.data.products)) {
-                setProdutos(response.data.data.products);
-            } else {
-                console.error('Dados recebidos não contêm a chave "products" ou não é um array');
-                setError('Dados recebidos não contêm a chave "products" ou não é um array');
-            }
+            const produtos = await buscarProdutos(token);
+            setProdutos(produtos);
         } catch (error) {
-            console.error('Erro ao buscar produtos:', error);
-            setError('Erro ao buscar produtos');
+            setError(error.message);
         } finally {
             setLoading(false);
         }
     };
 
-    const buscarProdutoId = async (id) => {
+    const handleBuscarProdutoId = async (id) => {
         setLoading(true);
         try {
-            const response = await axios.get(`https://interview.t-alpha.com.br/api/products/get-one-product/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-
-            console.log('Dados recebidos:', response.data);
-
-            if (response.data && response.data.data && response.data.data.product) {
-                setProdutos([response.data.data.product]);
-            } else {
-                console.error('Dados recebidos não contêm a chave "product"');
-                setError('Dados recebidos não contêm a chave "product"');
-                setProdutos([]);
-            }
+            const produto = await buscarProdutoId(id, token);
+            setProdutos([produto]);
         } catch (error) {
-            console.error('Erro ao buscar produto:', error);
-            setError('Erro ao buscar produto');
+            setError(error.message);
             setProdutos([]);
         } finally {
             setLoading(false);
@@ -66,53 +43,41 @@ export default function BuscarTodosProdutos() {
 
     const handleBuscarProduto = () => {
         if (produtoId) {
-            buscarProdutoId(produtoId);
+            handleBuscarProdutoId(produtoId);
         } else {
             setError('Por favor, insira um código de produto.');
         }
     };
 
     useEffect(() => {
-        buscarProdutos();
-    }, []);
+        handleBuscarProdutos();
+    }, [vizualizarModal, dataProduto]);
+
+    const handleEditProduct = async (produto) => {
+        setDataProduto(produto);
+        setOpenModal(true);
+        setVizualizarModal('AtualizarProduto');
+    };
+
+    const handleDeleteProduct = async (id) => {
+        try {
+            await deletarProduto(id, token);
+            setProdutos(produtos.filter((produto) => produto.id !== id));
+        } catch (error) {
+            setError(error.message);
+        }
+    };
 
     if (loading) {
-        return (
-            <Container>
-                <h1>Carregando...</h1>
-            </Container>
-        );
+        return <Container><h1>Carregando...</h1></Container>;
     }
 
     if (error) {
-        return (
-            <Container>
-                <h1>{error}</h1>
-            </Container>
-        );
+        return <Container><h1>{error}</h1></Container>;
     }
 
     if (produtos.length === 0) {
-        return (
-            <Container>
-                <h1>Nenhum produto encontrado.</h1>
-            </Container>
-        );
-    }
-
-
-    const deletarProduto = async (id) => {
-        console.log('chamou a função de deletar produto', id);
-        try {
-            await axios.delete(`https://interview.t-alpha.com.br/api/products/delete-product/${id}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
-            setProdutos(produtos.filter((produto) => produto.id !== id));
-        } catch (error) {
-            console.error('Erro ao deletar produto:', error);
-        }
+        return <Container><h1>Nenhum produto encontrado.</h1></Container>;
     }
 
     return (
@@ -125,10 +90,8 @@ export default function BuscarTodosProdutos() {
                     onChange={(e) => setProdutoId(e.target.value)}
                 />
                 <button onClick={handleBuscarProduto}>Buscar Produto</button>
-                <button onClick={() => setOpenModal(true)}>Cadastrar produto</button>
-
+                <button onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar produto</button>
             </BoxHeader>
-
             <Table>
                 <thead>
                     <tr>
@@ -151,10 +114,10 @@ export default function BuscarTodosProdutos() {
                             <td>
                                 <BoxIcon>
                                     <div>
-                                        <MdOutlineDelete color={'red'} size={40} onClick={() => deletarProduto(produto.id)} />
+                                        <MdOutlineDelete color={'red'} size={40} onClick={() => handleDeleteProduct(produto.id)} />
                                     </div>
                                     <BoxButton>
-                                        <TbEdit size={20} />
+                                        <TbEdit size={20} onClick={() => handleEditProduct(produto)} />
                                     </BoxButton>
                                 </BoxIcon>
                             </td>
@@ -162,8 +125,8 @@ export default function BuscarTodosProdutos() {
                     ))}
                 </tbody>
             </Table>
-            <Modal isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} width={600} >
-                <CriarProduto />
+            <Modal isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} width={600}>
+                {vizualizarModal === 'CriarProduto' ? <CriarProduto /> : <AtualizarProduto dataProduto={dataProduto} />}
             </Modal>
         </Container>
     );

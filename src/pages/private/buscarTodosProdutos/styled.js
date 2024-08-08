@@ -11,8 +11,7 @@ export const Container = styled.div`
         padding: 20px;
     }
     button {
-        background-color: blue;
-        color: #fff;
+        background-color: #4574a1;
         border-radius: 5px;
         cursor: pointer;
         width: 150px;
@@ -31,7 +30,6 @@ export const Container = styled.div`
 export const Table = styled.table`
     width: 100%;
     border-collapse: collapse;
-    background-color: #fff;
     margin: 20px;
 
     th, td {
@@ -40,8 +38,8 @@ export const Table = styled.table`
     }
 
     thead {
-        background-color: blue;
-        color: #fff;
+        background-color: #4574a1;
+        color: #000;
     }
 
     th {
@@ -74,12 +72,12 @@ export const BoxIcon = styled.div`
 
 export const BoxButton = styled.button`
     display: flex;
-    background-color: #4574a1 !important;
     width: 40px !important;
     height: 40px !important;
     justify-content: center;
     align-items: center;
     border: none;
-    `
+`
+
 
 

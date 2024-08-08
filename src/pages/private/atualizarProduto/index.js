@@ -1,7 +1,8 @@
-import axios from "axios";
-import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from "./styled";
+import React, { useEffect } from 'react';
+import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from './styled';
+import { updateProduct } from '../../../service';
 
-export default function CriarProduto() {
+export default function AtualizarProduto({ dataProduto }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         
@@ -12,43 +13,31 @@ export default function CriarProduto() {
             price: parseFloat(formData.get('price')),
             stock: parseInt(formData.get('stock'), 10)
         };
-    
-        const token = localStorage.getItem('token');
-        if (!token) {
-            alert('Token de autenticação não encontrado. Por favor, faça o login novamente.');
-            return; 
-        }
-    
-        try {
-            await axios.post(
-                'https://interview.t-alpha.com.br/api/products/create-product',
-                data, 
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` 
-                    }
-                }
-            );
-    
-            alert('Produto cadastrado com sucesso!');
-        } catch (error) {
-            console.error('Erro ao fazer cadastro:', error);
-            alert('Erro ao fazer cadastro, tente novamente');
-        }
-    };
+
+        await updateProduct(dataProduto, data);
+    }
+
     const formatPreco = (event) => {
         const input = event.target;
-        let value = parseFloat(input.value.replace(',', '.'));
+        let value = parseFloat(input.value.replace(',', '.'))
         if (!isNaN(value)) {
-            input.value = value.toFixed(2).replace('.', ',');
+            input.value = value.toFixed(2).replace('.', ',')
         }
     };
+
+    useEffect(() => {
+        if (dataProduto) {
+            document.getElementById('name').value = dataProduto.name || '';
+            document.getElementById('description').value = dataProduto.description || '';
+            document.getElementById('price').value = dataProduto.price ? dataProduto.price.toFixed(2).replace('.', ',') : '';
+            document.getElementById('stock').value = dataProduto.stock || '';
+        }
+    }, [dataProduto]);
 
     return (
         <Container>
             <form onSubmit={handleSubmit}>
-                <h1>Cadastrar produto</h1>
+                <h1>Editar produto</h1>
                 <Box>
                     <BoxStart>
                         <span>Nome do Produto</span>
@@ -72,9 +61,8 @@ export default function CriarProduto() {
                     </BoxStart>
                 </Box>
                 <BoxButton>
+                    <button type="submit"  >Salvar e sair</button>
                     <button type="submit">Salvar</button>
-                    <button type="submit">Salvar e sair</button>
-
                 </BoxButton>
             </form>
         </Container>

@@ -13,7 +13,6 @@ export default function Login() {
         formData.forEach((value, key) => {
             data[key] = value;
           });
-          console.log('Dados do cadastro:', data);
 
         try {
             await axios.post('https://interview.t-alpha.com.br/api/auth/login', {
@@ -22,7 +21,6 @@ export default function Login() {
             }).then((response) => {
                 localStorage.setItem('token', response.data.data.token);
                 navigate('/buscarTodosProdutos');
-                console.log(response.data);
             })
         } catch (error) {
             console.error('Erro ao fazer login:', error)

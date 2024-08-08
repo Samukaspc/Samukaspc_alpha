@@ -34,9 +34,8 @@ export default function Cadastro() {
         }
 
         try {
-            const response = await axios.post('https://interview.t-alpha.com.br/api/auth/register', data);
+            await axios.post('https://interview.t-alpha.com.br/api/auth/register', data);
             alert('Cadastro realizado com sucesso');
-            console.log('Resposta:', response.data);
         } catch (error) {
             console.error('Erro ao fazer cadastro:', error);
             alert('Erro ao fazer cadastro, tente novamente');
