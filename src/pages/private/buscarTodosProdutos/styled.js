@@ -4,30 +4,62 @@ export const ContainerLoading = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    height: 100vh;
     width: 100%;
-`
+    `
+
+export const ContainerPai = styled.div`
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: start;
+    background-color: #f4f4f4;
+    overflow: hidden;
+    `
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #f4f4f4;
-    height: 100vh;
+    width: 100%;
+    padding: 20px;
+    max-width: 1400px;
+    overflow: hidden;
+    gap: 20px;
+    button {
+        background-color: #005eff;
+        color: white;
+        border: none;
+        height: 40px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+            background-color: #888;
+        }
+    }
    
     body {
-        font-family: Arial, sans-serif;
         background-color: #f4f7f9;
     }
 
     h2 {
         text-align: center;
-        margin-bottom: 20px;
         color: #333;
     }
-   
+    
    
 `;
+
+export const BoxButtonEnd = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    svg {
+        margin-right: 5px;
+    }
+`
 
 export const Table = styled.table`
     width: 100%;
@@ -35,27 +67,26 @@ export const Table = styled.table`
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
-    button {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
+    
     th, td {
         padding: 12px;
-        text-align: left;
-        height: 50px;
+        text-align: center;
+        button {
+            background-color: transparent;
+            width: 100%;
+            &:hover {
+            background-color: transparent;
+        }
+        }
     }
 
     thead th {
-        background-color: #0000ff; 
-        color: white;
-        width: 200px;
+        background-color: transparent; 
+        width: 100px;
     }
 
     tbody td {
-        text-align: left;
+        text-align: center;
         border: 1px solid #ddd;
     }
 
@@ -80,20 +111,12 @@ export const Table = styled.table`
 export const BoxHeader = styled.div`
     display: flex;
     width: 100%;
-    justify-content: center; 
     margin-bottom: 20px;
+    height: 100%;
+    justify-content: center;
     
-    button {
-        background-color: #0000ff;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        &:hover {
-            background-color: #888;
-        }
-    }
+    
+    
 `;
 
 
@@ -109,9 +132,13 @@ export const SearchBox = styled.div`
         width: 100%;
         border: none;
         border-radius: 5px;
-        height: 30px;
+        height: 20px;
+        width: 150px;
         padding: 10px;
-        text-align: center;
+        text-align: start;
+        &:focus {
+            outline: none;
+        }
     }
 
     svg {
@@ -127,15 +154,73 @@ export const Header = styled.div`
     display: flex;
     width: 100%;
     justify-content: space-between;
-    button {
+     button {
         background-color: #0000ff;
-        color: white;
         border: none;
+        color: white;
+        padding: 10px 20px;
         border-radius: 5px;
-        width: 150px;
         cursor: pointer;
         &:hover {
-            background-color: #888
+            background-color: #888;
+        }
+    }
+`
+
+export const BoxIcon = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
+export const BoxHeaderButton = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+`
+
+export  const HeaderTitulo = styled.div`
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    border-radius: 10px;
+    background-color: #0000ff;
+    padding: 10px;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    h2 {
+        color: white;
+        width: 100%;
+    }
+   
+`
+export  const HeaderLogo = styled.div`
+    display: flex;
+    width: 50px;
+    flex-direction: row;
+    border-radius: 10px;
+    background-color: #0000ff;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+`
+
+export const BoxTop = styled.div`
+    display : flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+    button {
+        background-color: #005eff;
+        color: white;
+        border: none;
+        height: 40px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+            background-color: #888;
         }
     }
 `

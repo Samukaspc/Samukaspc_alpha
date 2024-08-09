@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { BoxEnd, BoxHeader, Container, Table, SearchBox, Header, ContainerLoading } from './styled';
+import { BoxEnd, BoxHeader, Container, Table, SearchBox, Header, ContainerLoading, ContainerPai, BoxIcon, HeaderTitulo, HeaderLogo, BoxTop, BoxHeaderButton } from './styled';
 import { MdDelete, MdEditSquare, MdSearch } from 'react-icons/md';
 import CriarProduto from '../criarProduto';
 import AtualizarProduto from '../atualizarProduto';
@@ -8,6 +8,9 @@ import Pagination from '../../../component/paginacao';
 import Modal from '../../../component/modal';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../../component/loading';
+import { ImExit } from 'react-icons/im';
+import { IoIosClose } from 'react-icons/io';
+import logoImg from '../../../image/logo.png';
 
 export default function BuscarTodosProdutos() {
     const [produtos, setProdutos] = useState([]);
@@ -21,6 +24,7 @@ export default function BuscarTodosProdutos() {
     const [itemsPerPage] = useState(5);
     const token = localStorage.getItem('token');
     const navigate = useNavigate();
+    const [mostraricon, setMostrarIcon] = useState(false);
 
     const handleBuscarProdutos = useCallback(async () => {
         try {
@@ -38,6 +42,7 @@ export default function BuscarTodosProdutos() {
         try {
             const produto = await buscarProdutoId(id, token);
             setProdutos([produto]);
+            setMostrarIcon(true);
         } catch (error) {
             setError(error.message);
             setProdutos([]);
@@ -56,7 +61,7 @@ export default function BuscarTodosProdutos() {
 
     useEffect(() => {
         handleBuscarProdutos();
-    }, [vizualizarModal, dataProduto, handleBuscarProdutos]);
+    }, [vizualizarModal, dataProduto, handleBuscarProdutos, produtoId]);
 
     const handleEditProduct = async (produto) => {
         setDataProduto(produto);
@@ -68,6 +73,11 @@ export default function BuscarTodosProdutos() {
         try {
             await deletarProduto(id, token);
             setProdutos(produtos.filter((produto) => produto.id !== id));
+
+            const currentItems = produtos.slice(indexOfFirstItem, indexOfLastItem);
+            if (currentItems.length === 1) {
+                handlePageChange(currentPage - 1);
+            }
         } catch (error) {
             setError(error.message);
         }
@@ -83,13 +93,7 @@ export default function BuscarTodosProdutos() {
     };
 
     const desconectarUsuario = () => {
-        const currentItems = produtos.slice(indexOfFirstItem, indexOfLastItem);
-
-        if (currentItems.length === 1) {
-            handleBuscarProdutos();
-        } else {
-            navigate('/');
-        }
+        navigate('/');
     };
 
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -110,66 +114,91 @@ export default function BuscarTodosProdutos() {
     }
 
     return (
-        <Container>
-            <h1>Tabela de produtos</h1>
-            <Header>
-                <button onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar Produto</button>
-                <SearchBox>
-                    <input
-                        type="text"
-                        placeholder="Pesquisar Produto"
-                        value={produtoId}
-                        onChange={(e) => setProdutoId(e.target.value)}
-                    />
-                    <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
-                </SearchBox>
-                <button onClick={desconectarUsuario}>{produtos.length === 1 ? 'Voltar' : 'Sair'}</button>
-            </Header>
+        <ContainerPai>
+            <Container>
+                <BoxTop>
+                    <HeaderLogo>
+                        <img src={logoImg} alt="Logo" width={50} />
+                    </HeaderLogo>
+                    <HeaderTitulo>
+                        <h2>Tabela de produtos</h2>
+                        <button onClick={desconectarUsuario}>
+                            <BoxIcon>
+                                <ImExit scale={30} />
+                                <span>Sair</span>
+                            </BoxIcon>
+                        </button>
+                    </HeaderTitulo>
+                </BoxTop>
 
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nome</th>
-                        <th>Descrição</th>
-                        <th>Preço</th>
-                        <th>Estoque</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {currentItems.map((produto) => (
-                        <tr key={produto.id}>
-                            <td>{produto.id}</td>
-                            <td>{produto.name}</td>
-                            <td>{produto.description}</td>
-                            <td>R$ {produto.price.toFixed(2).replace('.', ',')}</td>
-                            <td>{produto.stock}</td>
-                            <td>
-                                <BoxEnd>
-                                    <button onClick={() => handleDeleteProduct(produto.id)}>
-                                        <MdDelete color={'#ff0000'} size={24} />
-                                    </button>
-                                    <button onClick={() => handleEditProduct(produto)}>
-                                        <MdEditSquare color={'#008000'} size={24} />
-                                    </button>
-                                </BoxEnd>
-                            </td>
+                <BoxHeaderButton>
+                    <button onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar Produto</button>
+                    <SearchBox>
+                        <input
+                            type="text"
+                            placeholder="Pesquisar Produto"
+                            value={produtoId}
+                            onChange={(e) => setProdutoId(e.target.value)}
+                        />
+                        {mostraricon ?
+                            (
+                                <IoIosClose size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos() }} style={{ cursor: 'pointer', color: '#007bff' }} />
+                            ) : (
+                                <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
+                            )}
+                    </SearchBox>
+
+                </BoxHeaderButton>
+                <Header>
+
+                </Header>
+
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Preço</th>
+                            <th>Estoque</th>
+                            <th>Ações</th>
                         </tr>
-                    ))}
-                </tbody>
-            </Table>
-            <BoxHeader>
-                <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                />
-            </BoxHeader>
+                    </thead>
+                    <tbody>
+                        {currentItems.map((produto) => (
+                            <tr key={produto.id}>
+                                <td>{produto.id}</td>
+                                <td>{produto.name}</td>
+                                <td>{produto.description}</td>
+                                <td>R$ {produto.price.toFixed(2).replace('.', ',')}</td>
+                                <td>{produto.stock}</td>
+                                <td>
+                                    <BoxEnd>
+                                        <button onClick={() => handleDeleteProduct(produto.id)}>
+                                            <MdDelete color={'#ff0000'} size={24} />
+                                        </button>
+                                        <button onClick={() => handleEditProduct(produto)}>
+                                            <MdEditSquare color={'#008000'} size={24} />
+                                        </button>
+                                    </BoxEnd>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+                <BoxHeader>
+                    <Pagination
+                        currentPage={currentPage}
+                        totalPages={totalPages}
+                        onPageChange={handlePageChange}
+                    />
+                </BoxHeader>
 
-            <Modal isOpen={openModal} setOpenModal={handleCloseModal} width={600}>
-                {vizualizarModal === 'CriarProduto' ? <CriarProduto onClose={handleCloseModal} /> : <AtualizarProduto dataProduto={dataProduto} onClose={handleCloseModal} />}
-            </Modal>
-        </Container>
+                <Modal isOpen={openModal} setOpenModal={handleCloseModal} width={600}>
+                    {vizualizarModal === 'CriarProduto' ? <CriarProduto onClose={handleCloseModal} /> : <AtualizarProduto dataProduto={dataProduto} onClose={handleCloseModal} />}
+                </Modal>
+            </Container>
+        </ContainerPai>
+
     );
 }
