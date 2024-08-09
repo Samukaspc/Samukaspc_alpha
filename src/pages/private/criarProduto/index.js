@@ -42,7 +42,7 @@ export default function CriarProduto({ onClose }) {
         }
     
         try {
-            await criarProduto(data, token);
+            await criarProduto(data, token)
     
             nameRef.current.value = '';
             descriptionRef.current.value = '';

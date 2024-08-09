@@ -79,6 +79,14 @@ export  const HeaderTitulo = styled.div`
         width: 100%;
         color: #fff
     }
+    @media(max-width: 800px) {
+        h2 {
+            font-size: 15px;
+        }
+        button {
+            padding: 5px 10px;
+        }
+    }
    
 `
 
@@ -86,4 +94,5 @@ export const BoxIcon = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fff;
 `

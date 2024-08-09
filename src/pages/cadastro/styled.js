@@ -46,6 +46,9 @@ export const Box = styled.div`
         width: 280px;
     }
     justify-content: center;
+    @media (max-width: 800px) {
+        flex-direction: column;
+    }
     `
 
 export const BoxStart = styled.div`

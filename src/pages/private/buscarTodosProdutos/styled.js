@@ -60,11 +60,11 @@ export const BoxButtonEnd = styled.div`
     }
 `
 
+
 export const Table = styled.table`
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
-    overflow: hidden;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     
     th, td {
@@ -74,8 +74,8 @@ export const Table = styled.table`
             background-color: transparent;
             width: 100%;
             &:hover {
-            background-color: transparent;
-        }
+                background-color: transparent;
+            }
         }
     }
     
@@ -105,6 +105,13 @@ export const Table = styled.table`
     tbody tr:last-child td {
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+    }
+
+    @media (max-width: 800px) {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch; 
+        white-space: nowrap;
     }
 `;
 
@@ -152,6 +159,13 @@ export const BoxHeaderButton = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
+    @media(max-width: 800px) {
+        flex-direction: column;
+        gap: 10px;
+        input {
+            width: 100%;
+        }
+    }
 `
 
 

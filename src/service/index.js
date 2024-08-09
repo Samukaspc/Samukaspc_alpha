@@ -4,6 +4,7 @@ const apiUrlAuth = 'https://interview.t-alpha.com.br/api/auth';
 
 
 export const updateProduct = async (id, data) => {
+    console.log('updateProduct')
     const token = localStorage.getItem('token');
     if (!token) {
         return; 
@@ -19,15 +20,17 @@ export const updateProduct = async (id, data) => {
                     'Authorization': `Bearer ${token}`
                 }
             }
-        );
+        )
+       
     } catch (error) {
         if (error.response && error.response.data) {
             throw new Error(error.response.data.message || 'Erro desconhecido');
         }
-    }
+    } 
 };
 
 export const criarProduto = async (data, token) => {
+    console.log('criarProduto')
     try {
         const response = await axios.post(
             `${apiUrl}/create-product`,
@@ -39,6 +42,7 @@ export const criarProduto = async (data, token) => {
                 }
             }
         );
+        console.log(response.data)  
         return response.data;
     } catch (error) {
         if (error.response && error.response.data) {
@@ -50,6 +54,7 @@ export const criarProduto = async (data, token) => {
 
 
 export const buscarProdutos = async (token) => {
+    console.log('buscarProdutos')
     try {
         const response = await axios.get(`${apiUrl}/get-all-products`, {
             headers: { 'Authorization': `Bearer ${token}` }
@@ -64,6 +69,7 @@ export const buscarProdutos = async (token) => {
 };
 
 export const buscarProdutoId = async (id, token) => {
+    console.log('buscarProdutoId')
     try {
         const response = await axios.get(`${apiUrl}/get-one-product/${id}`, {
             headers: { 'Authorization': `Bearer ${token}` }
@@ -78,6 +84,7 @@ export const buscarProdutoId = async (id, token) => {
 };
 
 export const deletarProduto = async (id, token) => {
+    console.log('deletarProduto')   
     try {
         await axios.delete(`${apiUrl}/delete-product/${id}`, {
             headers: { 'Authorization': `Bearer ${token}` }
@@ -90,6 +97,7 @@ export const deletarProduto = async (id, token) => {
     }
 };
 export const login = async (taxNumber, password) => {
+    console.log('login')
     try {
         const response = await axios.post(`${apiUrlAuth}/login`, {
             taxNumber,
@@ -107,6 +115,7 @@ export const login = async (taxNumber, password) => {
 
 
 export const register = async (data) => {
+    console.log('register')
     try {
         const response = await axios.post(`${apiUrlAuth}/register`, data);
         return response.data;
