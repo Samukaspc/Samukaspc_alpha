@@ -26,7 +26,7 @@ export default function Login() {
             localStorage.setItem('token', response.data.token);
             navigate('/buscarTodosProdutos');
         } catch (error) {
-            showAlert('error', error.response?.data?.message || 'Erro desconhecido');
+            showAlert('error', error.message || 'Erro desconhecido');
         }
     }
 

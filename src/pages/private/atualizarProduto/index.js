@@ -22,7 +22,7 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
             await updateProduct(dataProduto.id, data);
             setAlert({ type: 'success', message: 'Produto atualizado com sucesso!' });
 
-            if (buttonClicked === 'saveAndExit' && onClose) {
+            if (buttonClicked && onClose) {
                 onClose();
             }
         } catch (error) {
@@ -81,12 +81,6 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
                         onClick={() => setButtonClicked('saveAndExit')}
                     >
                         Salvar e sair
-                    </button>
-                    <button
-                        type="submit"
-                        onClick={() => setButtonClicked('save')}
-                    >
-                        Salvar
                     </button>
                 </BoxButton>
             </form>

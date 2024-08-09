@@ -21,7 +21,9 @@ export const updateProduct = async (id, data) => {
             }
         );
     } catch (error) {
-        console.error('Erro ao fazer cadastro:', error);
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data.message || 'Erro desconhecido');
+        }
     }
 };
 
@@ -39,6 +41,9 @@ export const criarProduto = async (data, token) => {
         );
         return response.data;
     } catch (error) {
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data.message || 'Erro desconhecido');
+        }
         throw new Error('Erro ao criar produto');
     }
 };
@@ -51,6 +56,9 @@ export const buscarProdutos = async (token) => {
         });
         return response.data.data.products;
     } catch (error) {
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data.message || 'Erro desconhecido');
+        }
         throw new Error('Erro ao buscar produtos');
     }
 };
@@ -62,6 +70,9 @@ export const buscarProdutoId = async (id, token) => {
         });
         return response.data.data.product;
     } catch (error) {
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data.message || 'Erro desconhecido');
+        }
         throw new Error('Erro ao buscar produto');
     }
 };
@@ -72,6 +83,9 @@ export const deletarProduto = async (id, token) => {
             headers: { 'Authorization': `Bearer ${token}` }
         });
     } catch (error) {
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data.message || 'Erro desconhecido');
+        }
         throw new Error('Erro ao deletar produto');
     }
 };
@@ -84,8 +98,23 @@ export const login = async (taxNumber, password) => {
 
         return response.data;
     } catch (error) {
-        console.error('Erro ao fazer login:', error);
-        throw new Error('Erro ao fazer login, tente novamente');
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data.message || 'Erro desconhecido');
+        }
+        throw new Error('Erro ao tentar autenticar');
+    }
+};
+
+
+export const register = async (data) => {
+    try {
+        const response = await axios.post(`${apiUrlAuth}/register`, data);
+        return response.data;
+    } catch (error) {
+        if (error.response && error.response.data) {
+            throw new Error(error.response.data.message || 'Erro desconhecido');
+        }
+        throw new Error('Erro ao tentar registrar');
     }
 };
 

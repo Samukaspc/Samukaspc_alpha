@@ -116,7 +116,7 @@ export default function BuscarTodosProdutos() {
                         />
                         {mostraricon ?
                             (
-                                <IoIosClose size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos() }} style={{ cursor: 'pointer', color: '#007bff' }} />
+                                <IoIosClose size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos();setProdutoId('') }} style={{ cursor: 'pointer', color: '#007bff' }} />
                             ) : (
                                 <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
                             )}

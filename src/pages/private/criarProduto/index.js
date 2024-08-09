@@ -55,7 +55,6 @@ export default function CriarProduto({ onClose }) {
                 onClose();
             }
         } catch (error) {
-            console.error('Erro ao fazer cadastro:', error);
             setAlert({ type: 'error', message: 'Erro ao fazer cadastro, tente novamente.' });
         }
     };
