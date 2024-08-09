@@ -5,7 +5,7 @@ export default function Alert({ type, message, onClose }) {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose(); 
-    }, 100000); 
+    }, 2000); 
 
     return () => clearTimeout(timer); 
   }, [onClose]);

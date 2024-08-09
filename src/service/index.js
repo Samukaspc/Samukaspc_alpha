@@ -3,7 +3,7 @@ const apiUrl = 'https://interview.t-alpha.com.br/api/products';
 const apiUrlAuth = 'https://interview.t-alpha.com.br/api/auth';
 
 
-export const updateProduct = async (dataProduto, data) => {
+export const updateProduct = async (id, data) => {
     const token = localStorage.getItem('token');
     if (!token) {
         return; 
@@ -11,7 +11,7 @@ export const updateProduct = async (dataProduto, data) => {
 
     try {
         await axios.patch(
-            `${apiUrl}/update-product/${dataProduto.id}`,
+            `${apiUrl}/update-product/${id}`,
             data,
             {
                 headers: {

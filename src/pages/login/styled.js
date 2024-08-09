@@ -57,6 +57,11 @@ export const BoxLogo = styled.div`
 
 export const BoxCadastro = styled.div`
     display: flex;
+    flex-direction: column;
+    a {
+        text-decoration: none;
+        color: blue;
+    }
 `
 
 export const BoxStart = styled.div`

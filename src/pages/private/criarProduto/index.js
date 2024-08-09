@@ -73,7 +73,6 @@ export default function CriarProduto({ onClose }) {
 
     return (
         <Container>
-            {/* Renderiza o alerta condicionalmente */}
             {alert.message && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
             
             <form onSubmit={handleSubmit}>
