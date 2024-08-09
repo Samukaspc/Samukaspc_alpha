@@ -151,12 +151,8 @@ export default function BuscarTodosProdutos() {
                                 <td>{produto.stock}</td>
                                 <td>
                                     <BoxEnd>
-                                        <button onClick={() => handleDeleteProduct(produto.id)}>
-                                            <MdDelete color={'#ff0000'} size={24} />
-                                        </button>
-                                        <button onClick={() => handleEditProduct(produto)}>
-                                            <MdEditSquare color={'#008000'} size={24} />
-                                        </button>
+                                            <MdDelete color={'#ff0000'} size={24} onClick={() => handleDeleteProduct(produto.id)} />
+                                            <MdEditSquare color={'#5d46e2'} size={24} onClick={() => handleEditProduct(produto)} />
                                     </BoxEnd>
                                 </td>
                             </tr>

@@ -3,7 +3,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
-    height: 90vh;
+    height: 100vh;
     width: 100%;
     justify-content: center;
 `;
@@ -30,7 +30,8 @@ export const BoxButton = styled.div`
     flex-direction: column;
     button {
         padding: 10px;
-        background-color: blue;
+        background-color: #5d46e2;
+        height: 40px;
         color: #fff;
         border: 1px solid #000;
         border: none;

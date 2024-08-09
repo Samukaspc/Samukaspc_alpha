@@ -28,7 +28,7 @@ export const Container = styled.div`
     overflow: hidden;
     gap: 20px;
     button {
-        background-color: #005eff;
+        background-color: #5d46e2;
         color: white;
         border: none;
         padding: 10px 20px;
@@ -81,7 +81,7 @@ export const Table = styled.table`
     
     thead th {
         color: #ffffff;
-        background-color: #0000ff; 
+        background-color: #5d46e2; 
         width: 100px;
     }
 
@@ -120,6 +120,7 @@ export const BoxHeader = styled.div`
 export const BoxEnd = styled.div`
     display: flex;
     align-items: center;
+    justify-content: center;
 `;
 export const SearchBox = styled.div`
     display: flex;

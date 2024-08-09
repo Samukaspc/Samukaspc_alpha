@@ -10,7 +10,7 @@ import styled from "styled-components";
     overflow: hidden;
     gap: 20px;
     button {
-        background-color: #005eff;
+        background-color: #5d46e2;
         color: white;
         border: none;
         height: 40px;
@@ -33,7 +33,7 @@ export  const HeaderLogo = styled.div`
     height: 40px;
     flex-direction: row;
     border-radius: 10px;
-    background-color: #0000ff;
+    background-color: #5d46e2;
     padding: 10px;
     align-items: center;
     justify-content: center;
@@ -65,7 +65,7 @@ export  const HeaderTitulo = styled.div`
     width: 100%;
     flex-direction: row;
     border-radius: 10px;
-    background-color: #0000ff;
+    background-color: #5d46e2;
     padding: 10px;
     color: white;
     align-items: center;

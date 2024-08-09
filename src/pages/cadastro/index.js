@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Box, BoxButton, BoxStart, Container } from './styled';
+import { AletaError, Box, BoxButton, BoxStart, BoxSuccess, Container } from './styled';
+import { useNavigate } from 'react-router-dom';
 
 export default function Cadastro() {
-    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
     async function handleSubmit(event) {
         event.preventDefault();
         setError('');
-        setSuccess(''); 
+        setSuccess('');
 
         const formData = new FormData(event.target);
         const data = {};
@@ -37,7 +38,6 @@ export default function Cadastro() {
             delete data.confirmPassword;
         }
 
-        setLoading(true); 
 
         try {
             await axios.post('https://interview.t-alpha.com.br/api/auth/register', data);
@@ -46,18 +46,15 @@ export default function Cadastro() {
         } catch (error) {
             console.error('Erro ao fazer cadastro:', error);
             setError('Erro ao fazer cadastro, tente novamente');
-        } finally {
-            setLoading(false); 
         }
     }
 
     return (
         <Container>
             <form onSubmit={handleSubmit}>
+                {error && <AletaError>{error}</AletaError>}
+                {success && <BoxSuccess style>{success}</BoxSuccess>}
                 <h1>Cadastrar usuário</h1>
-                {loading && <div>Carregando...</div>}
-                {error && <div style={{ color: 'red' }}>{error}</div>}
-                {success && <div style={{ color: 'green' }}>{success}</div>}
                 <Box>
                     <BoxStart>
                         <span>Nome completo</span>
@@ -77,9 +74,11 @@ export default function Cadastro() {
                     </BoxStart>
                 </Box>
                 <BoxButton>
-                    <button type="submit" disabled={loading}>Cadastrar</button>
+                    <button type="submit" onClick={() => navigate('/')} >Voltar</button>
+                    <button type="submit">Cadastrar</button>
+
                 </BoxButton>
-                <a href="/">Voltar</a>
+                {/* <a href="/">Voltar</a> */}
             </form>
         </Container>
     );

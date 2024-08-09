@@ -19,13 +19,18 @@ export const BoxButton = styled.div`
     button {
         padding: 10px;
         margin: 5px;
-        background-color: blue;
+        background-color: #5d46e2;
         color: #fff;
         border: 1px solid #000;
         border-radius: 10px;
+        border: none;
         cursor: pointer;
-        width: 150px;
+        width: 300px;
+        height: 40px;
         justify-content: center;
+        &:hover {
+            background-color: #888;
+        }
     }
 `
 
@@ -38,7 +43,7 @@ export const Box = styled.div`
         padding: 10px;
         border: 1px solid #000;
         border-radius: 5px;
-        width: 300px;
+        width: 280px;
     }
     justify-content: center;
     `
@@ -48,6 +53,35 @@ display: flex;
 flex-direction: column;
 align-items: start;
 gap: 10px;
+`
+export const AletaError = styled.div`
+    display: flex;
+    border-radius: 5px;
+    padding: 10px;
+    border-radius:  none;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: red;
+    font-size: 15px;
+`
+
+export const BoxSuccess = styled.div`
+    display: flex;
+    border-radius: 5px;
+    padding: 10px;
+    border-radius:  none;
+    width: 200px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: green;
+    font-size: 15px;
 `
 
 

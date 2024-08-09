@@ -33,9 +33,10 @@ export default function Login() {
     const closeAlert = () => setAlert({ type: '', message: '' });
 
     return (
+        <>
+            {alert.message && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
         <Container>
             <form onSubmit={handleSubmit}>
-            {alert.message && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
                 <img src={logo} alt="Logo" width={200} />
                 <Box>
                     <BoxStart>
@@ -66,5 +67,7 @@ export default function Login() {
                 </Box>
             </form>
         </Container>
+        </>
+
     );
 }

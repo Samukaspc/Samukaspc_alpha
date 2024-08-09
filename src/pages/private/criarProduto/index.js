@@ -5,19 +5,18 @@ import Alert from '../../../component/alerta';
 
 export default function CriarProduto({ onClose }) {
     const nameRef = useRef(null);
+    const descriptionRef = useRef(null);
     const priceRef = useRef(null);
     const stockRef = useRef(null);
-    const descriptionRef = useRef(null);
-
     const [buttonClicked, setButtonClicked] = useState('');
     const [alert, setAlert] = useState({ type: '', message: '' });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
     
+        const rawPrice = priceRef.current.value.replace(',', '.');
         const price = parseFloat(rawPrice);
         const stock = parseInt(stockRef.current.value, 10);
-        const rawPrice = priceRef.current.value.replace(',', '.');
     
         if (isNaN(price) || price <= 0) {
             setAlert({ type: 'error', message: 'Preço inválido. Por favor, informe somente números' });
@@ -46,9 +45,9 @@ export default function CriarProduto({ onClose }) {
             await criarProduto(data, token);
     
             nameRef.current.value = '';
+            descriptionRef.current.value = '';
             priceRef.current.value = '';
             stockRef.current.value = '';
-            descriptionRef.current.value = '';
     
             setAlert({ type: 'success', message: 'Produto cadastrado com sucesso!' });
     
@@ -101,8 +100,18 @@ export default function CriarProduto({ onClose }) {
                     </BoxStart>
                 </Box>
                 <BoxButton>
-                    <button type="submit" onClick={() => setButtonClicked('saveAndExit')}> Salvar e sair</button>
-                    <button type="submit"onClick={() => setButtonClicked('save')}> Salvar </button>
+                    <button
+                        type="submit"
+                        onClick={() => setButtonClicked('saveAndExit')}
+                    >
+                        Salvar e sair
+                    </button>
+                    <button
+                        type="submit"
+                        onClick={() => setButtonClicked('save')}
+                    >
+                        Salvar
+                    </button>
                 </BoxButton>
             </form>
         </Container>

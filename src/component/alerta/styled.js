@@ -25,3 +25,11 @@ export const Icon = styled.span`
 export const Message = styled.span`
   font-size: 16px;
 `;
+
+
+export const Container = styled.div`
+  display: flex;
+  background-color: aqua;
+  position: absolute;
+  top: 0;
+`
