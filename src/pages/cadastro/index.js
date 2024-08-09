@@ -38,10 +38,10 @@ export default function Cadastro() {
             delete data.confirmPassword;
         }
 
-
         try {
             await axios.post('https://interview.t-alpha.com.br/api/auth/register', data);
             setSuccess('Cadastro realizado com sucesso');
+            navigate('/');
             event.target.reset();
         } catch (error) {
             console.error('Erro ao fazer cadastro:', error);
