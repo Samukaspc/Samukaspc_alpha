@@ -1,11 +1,16 @@
-import React from 'react';
-import { Box, BoxButton, BoxStart, Container } from "./styled";
+import React, { useState } from 'react';
 import axios from 'axios';
+import { Box, BoxButton, BoxStart, Container } from './styled';
 
 export default function Cadastro() {
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
 
     async function handleSubmit(event) {
         event.preventDefault();
+        setError('');
+        setSuccess(''); 
 
         const formData = new FormData(event.target);
         const data = {};
@@ -14,31 +19,35 @@ export default function Cadastro() {
         });
 
         if (data.taxNumber.length !== 11) {
-            alert('O CPF/CNPJ devera ter 11 caracteres');
+            setError('O CPF/CNPJ deverá ter 11 caracteres');
             return;
         }
-        if(data.phone.length > 9 || data.phone.length < 11){
-            alert('O telefone devera ter no minimo 10 caracteres');
-            return
+        if (data.phone.length < 10 || data.phone.length > 11) {
+            setError('O telefone deverá ter no mínimo 10 caracteres');
+            return;
         }
-
         if (data.password.length < 6) {
-            alert('A senha deve conter no mínimo 6 caracteres');
+            setError('A senha deve conter no mínimo 6 caracteres');
             return;
         }
         if (data.password !== data.confirmPassword) {
-            alert('As senhas não são iguais');
+            setError('As senhas não são iguais');
             return;
         } else {
             delete data.confirmPassword;
         }
 
+        setLoading(true); 
+
         try {
             await axios.post('https://interview.t-alpha.com.br/api/auth/register', data);
-            alert('Cadastro realizado com sucesso');
+            setSuccess('Cadastro realizado com sucesso');
+            event.target.reset();
         } catch (error) {
             console.error('Erro ao fazer cadastro:', error);
-            alert('Erro ao fazer cadastro, tente novamente');
+            setError('Erro ao fazer cadastro, tente novamente');
+        } finally {
+            setLoading(false); 
         }
     }
 
@@ -46,6 +55,9 @@ export default function Cadastro() {
         <Container>
             <form onSubmit={handleSubmit}>
                 <h1>Cadastrar usuário</h1>
+                {loading && <div>Carregando...</div>}
+                {error && <div style={{ color: 'red' }}>{error}</div>}
+                {success && <div style={{ color: 'green' }}>{success}</div>}
                 <Box>
                     <BoxStart>
                         <span>Nome completo</span>
@@ -65,7 +77,7 @@ export default function Cadastro() {
                     </BoxStart>
                 </Box>
                 <BoxButton>
-                    <button type="submit">Cadastrar</button>
+                    <button type="submit" disabled={loading}>Cadastrar</button>
                 </BoxButton>
                 <a href="/">Voltar</a>
             </form>

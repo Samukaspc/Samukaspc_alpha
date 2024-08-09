@@ -6,7 +6,6 @@ const apiUrlAuth = 'https://interview.t-alpha.com.br/api/auth';
 export const updateProduct = async (dataProduto, data) => {
     const token = localStorage.getItem('token');
     if (!token) {
-        alert('Token de autenticação não encontrado. Por favor, faça o login novamente.');
         return; 
     }
 
@@ -21,10 +20,8 @@ export const updateProduct = async (dataProduto, data) => {
                 }
             }
         );
-        alert('Produto cadastrado com sucesso!');
     } catch (error) {
         console.error('Erro ao fazer cadastro:', error);
-        alert('Erro ao fazer cadastro, tente novamente');
     }
 };
 

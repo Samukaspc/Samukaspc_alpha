@@ -1,25 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from './styled';
 import { updateProduct } from '../../../service';
+import Alert from '../../../component/alerta';
 
 export default function AtualizarProduto({ dataProduto, onClose }) {
+    const [buttonClicked, setButtonClicked] = useState('');
+    const [alert, setAlert] = useState({ type: '', message: '' });
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         const formData = new FormData(event.target);
         const data = {
             name: formData.get('name'),
             description: formData.get('description'),
-            price: parseFloat(formData.get('price')),
+            price: parseFloat(formData.get('price').replace(',', '.')),
             stock: parseInt(formData.get('stock'), 10)
         };
 
-        await updateProduct(dataProduto.id, data);
+        try {
+            await updateProduct(dataProduto.id, data);
+            setAlert({ type: 'success', message: 'Produto atualizado com sucesso!' });
 
-        if (buttonClicked === 'saveAndExit' && onClose) {
-            onClose();  
+            if (buttonClicked === 'saveAndExit' && onClose) {
+                onClose();
+            }
+        } catch (error) {
+            setAlert({ type: 'error', message: 'Erro ao atualizar o produto, tente novamente.' });
         }
-    }
+    };
 
     const formatPreco = (event) => {
         const input = event.target;
@@ -28,8 +37,6 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
             input.value = value.toFixed(2).replace('.', ',');
         }
     };
-
-    const [buttonClicked, setButtonClicked] = React.useState('');
 
     useEffect(() => {
         if (dataProduto) {
@@ -42,6 +49,8 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
 
     return (
         <Container>
+            {alert.message && <Alert type={alert.type} message={alert.message} onClose={() => setAlert({ type: '', message: '' })} />}
+            
             <form onSubmit={handleSubmit}>
                 <h1>Editar produto</h1>
                 <Box>

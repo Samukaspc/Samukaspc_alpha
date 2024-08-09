@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from "./styled";
 import { criarProduto } from '../../../service';
+import Alert from '../../../component/alerta';
 
 export default function CriarProduto({ onClose }) {
     const nameRef = useRef(null);
@@ -8,6 +9,7 @@ export default function CriarProduto({ onClose }) {
     const priceRef = useRef(null);
     const stockRef = useRef(null);
     const [buttonClicked, setButtonClicked] = useState('');
+    const [alert, setAlert] = useState({ type: '', message: '' });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -18,29 +20,31 @@ export default function CriarProduto({ onClose }) {
             price: parseFloat(priceRef.current.value.replace(',', '.')),
             stock: parseInt(stockRef.current.value, 10)
         };
-    
+
         const token = localStorage.getItem('token');
         if (!token) {
-            alert('Token de autenticação não encontrado. Por favor, faça o login novamente.');
+            setAlert({ type: 'error', message: 'Token de autenticação não encontrado. Por favor, faça o login novamente.' });
             return; 
         }
-    
+
         try {
             await criarProduto(data, token);
-    
+
+            // Limpa os campos após o sucesso
             nameRef.current.value = '';
             descriptionRef.current.value = '';
             priceRef.current.value = '';
             stockRef.current.value = '';
-    
-            alert('Produto cadastrado com sucesso!');
-    
+
+            // Define mensagem de sucesso
+            setAlert({ type: 'success', message: 'Produto cadastrado com sucesso!' });
+
             if (buttonClicked === 'saveAndExit' && onClose) {
                 onClose();
             }
         } catch (error) {
             console.error('Erro ao fazer cadastro:', error);
-            alert('Erro ao fazer cadastro, tente novamente');
+            setAlert({ type: 'error', message: 'Erro ao fazer cadastro, tente novamente' });
         }
     };
 
@@ -52,8 +56,13 @@ export default function CriarProduto({ onClose }) {
         }
     };
 
+    const closeAlert = () => setAlert({ type: '', message: '' });
+
     return (
         <Container>
+            {/* Renderiza o alerta condicionalmente */}
+            {alert.message && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
+            
             <form onSubmit={handleSubmit}>
                 <h1>Cadastrar produto</h1>
                 <Box>

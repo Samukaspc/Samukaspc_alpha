@@ -52,6 +52,7 @@ export const BoxStart = styled.div`
     }
 `;
 
+
 export const BoxButton = styled.div`
     display: flex;
     justify-content: center;

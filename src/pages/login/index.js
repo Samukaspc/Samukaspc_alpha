@@ -1,10 +1,17 @@
-import React from 'react';
-import { Box, BoxButton, BoxCadastro, BoxStart, Container } from "./styled";
-import logo from "../../image/login.png";
+import React, { useState } from 'react';
+import { Box, BoxButton, BoxCadastro, BoxStart, Container } from './styled';
+import logo from '../../image/login.png';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../service';
+import Alert from '../../component/alerta';
+
 export default function Login() {
     const navigate = useNavigate();
+    const [alert, setAlert] = useState({ type: '', message: '' });
+
+    const showAlert = (type, message) => {
+        setAlert({ type, message });
+    };
 
     async function handleSubmit(event) {
         event.preventDefault();
@@ -16,15 +23,19 @@ export default function Login() {
 
         try {
             const response = await login(data.taxNumber, data.password);
-            localStorage.setItem('token', response.data.token); 
+            localStorage.setItem('token', response.data.token);
             navigate('/buscarTodosProdutos');
         } catch (error) {
-            alert(error.message);
+            showAlert('error', error.response?.data?.message || 'Erro desconhecido');
         }
     }
 
+    const closeAlert = () => setAlert({ type: '', message: '' });
+
     return (
         <Container>
+            {alert.message && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
+            
             <form onSubmit={handleSubmit}>
                 <img src={logo} alt="Logo" width={200} />
                 <Box>
