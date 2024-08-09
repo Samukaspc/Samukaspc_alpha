@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from './styled';
 import { updateProduct } from '../../../service';
 
-export default function AtualizarProduto({ dataProduto }) {
+export default function AtualizarProduto({ dataProduto, onClose }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         
@@ -14,16 +14,22 @@ export default function AtualizarProduto({ dataProduto }) {
             stock: parseInt(formData.get('stock'), 10)
         };
 
-        await updateProduct(dataProduto, data);
+        await updateProduct(dataProduto.id, data);
+
+        if (buttonClicked === 'saveAndExit' && onClose) {
+            onClose();  
+        }
     }
 
     const formatPreco = (event) => {
         const input = event.target;
-        let value = parseFloat(input.value.replace(',', '.'))
+        let value = parseFloat(input.value.replace(',', '.'));
         if (!isNaN(value)) {
-            input.value = value.toFixed(2).replace('.', ',')
+            input.value = value.toFixed(2).replace('.', ',');
         }
     };
+
+    const [buttonClicked, setButtonClicked] = React.useState('');
 
     useEffect(() => {
         if (dataProduto) {
@@ -61,8 +67,18 @@ export default function AtualizarProduto({ dataProduto }) {
                     </BoxStart>
                 </Box>
                 <BoxButton>
-                    <button type="submit"  >Salvar e sair</button>
-                    <button type="submit">Salvar</button>
+                    <button
+                        type="submit"
+                        onClick={() => setButtonClicked('saveAndExit')}
+                    >
+                        Salvar e sair
+                    </button>
+                    <button
+                        type="submit"
+                        onClick={() => setButtonClicked('save')}
+                    >
+                        Salvar
+                    </button>
                 </BoxButton>
             </form>
         </Container>

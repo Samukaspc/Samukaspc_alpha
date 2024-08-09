@@ -2,82 +2,132 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
     display: flex;
-    width: 100%;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     background-color: #f4f4f4;
-    h1 {
-        padding: 20px;
+    height: 100vh;
+   
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f7f9;
     }
-    button {
-        background-color: #4574a1;
-        border-radius: 5px;
-        cursor: pointer;
-        width: 150px;
-        height: 35px;
-    }
-    input {
-        padding: 5px;
-        border: 1px solid #000;
-        border-radius: 5px;
-        width: 150px;
-        height: 20px;
-    }
-`;
 
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+   
+   
+`;
 
 export const Table = styled.table`
     width: 100%;
     border-collapse: collapse;
-    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    button {
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
 
     th, td {
         padding: 12px;
         text-align: left;
+        height: 50px;
     }
 
-    thead {
-        background-color: #4574a1;
-        color: #000;
+    thead th {
+        background-color: #0000ff; 
+        color: white;
+        width: 200px;
     }
 
-    th {
-        border-bottom: 2px solid #0056b3;
+    tbody td {
+        text-align: left;
+        border: 1px solid #ddd;
     }
 
     tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
+        background-color: #f0f8ff; 
+    }
+
+    tbody tr:nth-child(odd) {
+        background-color: #ffffff;
     }
 
     tbody tr:hover {
-        background-color: #f1f1f1;
+        background-color: #e6f2ff; 
+    }
+
+    tbody tr:last-child td {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
     }
 `;
 
 export const BoxHeader = styled.div`
-    padding: 5px;
     display: flex;
-    justify-content: end;
     width: 100%;
-    gap: 10px;
-    margin-right: 15px;
-`
+    justify-content: center; 
+    margin-bottom: 20px;
+    
+    button {
+        background-color: #0000ff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+            background-color: #888;
+        }
+    }
+`;
 
-export const BoxIcon = styled.div`
+
+export const BoxEnd = styled.div`
     display: flex;
-    justify-content: center;
     align-items: center;
-`
-
-export const BoxButton = styled.button`
+`;
+export const SearchBox = styled.div`
     display: flex;
-    width: 40px !important;
-    height: 40px !important;
-    justify-content: center;
     align-items: center;
-    border: none;
+    position: relative;
+    input {
+        width: 100%;
+        border: none;
+        border-radius: 5px;
+        height: 30px;
+        padding: 10px;
+        text-align: center;
+    }
+
+    svg {
+        position: absolute;
+        right: 10px;
+        cursor: pointer;
+        color: #007bff;
+    }
+`;
+
+
+export const Header = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    button {
+        background-color: #0000ff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        width: 150px;
+        cursor: pointer;
+        &:hover {
+            background-color: #888
+        }
+    }
 `
-
-
-

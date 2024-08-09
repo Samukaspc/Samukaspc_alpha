@@ -1,74 +1,123 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
-    width: 100%;
-    justify-content: center;
+    background-color: #f9f9f9;
+
     a {
         text-decoration: none;
-        color: blue;
+        color: #007bff;
     }
-    
-`
+`;
 
 export const Box = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    gap: 10px;
-    input {
-        padding: 10px;
-        border: 1px solid #000;
-        border-radius: 5px;
-        width: 300px;
-    }
-    justify-content: center;
-    `
-
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+`;
 export const BoxStart = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: start;
-    gap: 10px;
-    textArea {
-        padding: 10px;
-        border: 1px solid #000;
-        border-radius: 5px;
-        max-width: 300px;
-        min-width: 300px;
-    }
-`
-export const BoxButton = styled.div`
-    margin-top: 20px;
-    
-    button {
-        padding: 10px;
-        margin: 5px;
-        background-color: #4574a1;
-        color: #fff;
-        border: 1px solid #000;
-        border-radius: 10px;
-        cursor: pointer;
-        width: 150px;
-        justify-content: center;
-    }
- `
+    width: 100%;
+    gap: 15px;
 
- export const BoxInput = styled.div`
-    input {
-        width: 135px;
+    textarea {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        resize: vertical;
+        min-height: 120px;
+        width: 100%;
+        box-sizing: border-box;
     }
-    `
+
+    input[type="text"], input[type="number"] {
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    span {
+        font-weight: bold;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+`;
+
+export const BoxButton = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    button {
+        padding: 12px 20px;
+        margin: 0 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s, box-shadow 0.3s;
+        width: 150px;
+        height: 45px;
+    }
+
+    button:first-of-type {
+        background-color: #007bff;
+        color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    button:last-of-type {
+        background-color: #28a745;
+        color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        &:hover {
+            background-color: #218838;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+        }
+    }
+`;
+
+export const BoxInput = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+
+    input {
+        width: 100%;
+    }
+`;
+
 export const BoxSpan = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
-  
-  `
-export const BoxForm = styled.div`
-    gap: 10px;
-    display: flex;
-`
+    width: 100%;
+`;
 
+export const BoxForm = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+
+    @media (min-width: 600px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+`;

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { BoxButton, BoxHeader, BoxIcon, Container, Table } from './styled';
-import { MdOutlineDelete } from 'react-icons/md';
-import Modal from '../../../component';
+import React, { useEffect, useState, useCallback } from 'react';
+import { BoxEnd, BoxHeader, Container, Table, SearchBox, Header } from './styled';
+import { MdDelete, MdEditSquare, MdSearch } from 'react-icons/md';
 import CriarProduto from '../criarProduto';
 import AtualizarProduto from '../atualizarProduto';
-import { TbEdit } from 'react-icons/tb';
 import { buscarProdutoId, buscarProdutos, deletarProduto } from '../../../service';
+import Pagination from '../../../component/paginacao';
+import Modal from '../../../component/modal';
+import { useNavigate } from 'react-router-dom';
 
 export default function BuscarTodosProdutos() {
     const [produtos, setProdutos] = useState([]);
@@ -15,9 +16,13 @@ export default function BuscarTodosProdutos() {
     const [openModal, setOpenModal] = useState(false);
     const [vizualizarModal, setVizualizarModal] = useState('');
     const [dataProduto, setDataProduto] = useState({});
+    const [currentPage, setCurrentPage] = useState(1);
+    const [itemsPerPage] = useState(5);
     const token = localStorage.getItem('token');
+    const navigate = useNavigate()
 
-    const handleBuscarProdutos = async () => {
+
+    const handleBuscarProdutos = useCallback(async () => {
         try {
             const produtos = await buscarProdutos(token);
             setProdutos(produtos);
@@ -26,7 +31,7 @@ export default function BuscarTodosProdutos() {
         } finally {
             setLoading(false);
         }
-    };
+    }, [token]);
 
     const handleBuscarProdutoId = async (id) => {
         setLoading(true);
@@ -51,7 +56,7 @@ export default function BuscarTodosProdutos() {
 
     useEffect(() => {
         handleBuscarProdutos();
-    }, [vizualizarModal, dataProduto]);
+    }, [vizualizarModal, dataProduto, handleBuscarProdutos]);
 
     const handleEditProduct = async (produto) => {
         setDataProduto(produto);
@@ -68,6 +73,30 @@ export default function BuscarTodosProdutos() {
         }
     };
 
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        setVizualizarModal('');
+    };
+
+    const handlePageChange = (newPage) => {
+        setCurrentPage(newPage);
+    };
+
+    const desconectarUsuario = () => {
+        const currentItems = produtos.slice(indexOfFirstItem, indexOfLastItem);
+        
+        if (currentItems.length === 1) {
+            handleBuscarProdutos()
+        } else {
+            navigate('/')
+        }
+    };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentItems = produtos.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(produtos.length / itemsPerPage);
+
     if (loading) {
         return <Container><h1>Carregando...</h1></Container>;
     }
@@ -82,16 +111,22 @@ export default function BuscarTodosProdutos() {
 
     return (
         <Container>
-            <BoxHeader>
-                <input
-                    type="text"
-                    placeholder="Código do produto"
-                    value={produtoId}
-                    onChange={(e) => setProdutoId(e.target.value)}
-                />
-                <button onClick={handleBuscarProduto}>Buscar Produto</button>
-                <button onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar produto</button>
-            </BoxHeader>
+            <h1>Tabela de produtos</h1>
+            <Header>
+                <button onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar Produto</button>
+                <SearchBox>
+                    <input
+                        type="text"
+                        placeholder="Pesquisar Produto"
+                        value={produtoId}
+                        onChange={(e) => setProdutoId(e.target.value)}
+                    />
+                    <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
+                </SearchBox>
+                <button onClick={desconectarUsuario} >{produtos.length === 1 ? 'Voltar' : 'Sair'}</button>
+            </Header>
+
+
             <Table>
                 <thead>
                     <tr>
@@ -104,7 +139,7 @@ export default function BuscarTodosProdutos() {
                     </tr>
                 </thead>
                 <tbody>
-                    {produtos.map((produto) => (
+                    {currentItems.map((produto) => (
                         <tr key={produto.id}>
                             <td>{produto.id}</td>
                             <td>{produto.name}</td>
@@ -112,21 +147,29 @@ export default function BuscarTodosProdutos() {
                             <td>R$ {produto.price.toFixed(2).replace('.', ',')}</td>
                             <td>{produto.stock}</td>
                             <td>
-                                <BoxIcon>
-                                    <div>
-                                        <MdOutlineDelete color={'red'} size={40} onClick={() => handleDeleteProduct(produto.id)} />
-                                    </div>
-                                    <BoxButton>
-                                        <TbEdit size={20} onClick={() => handleEditProduct(produto)} />
-                                    </BoxButton>
-                                </BoxIcon>
+                                <BoxEnd>
+                                    <button onClick={() => handleDeleteProduct(produto.id)} >
+                                        <MdDelete color={'#ff0000'} size={24} />
+                                    </button>
+                                    <button onClick={() => handleEditProduct(produto)} >
+                                        <MdEditSquare color={'#008000'} size={24} />
+                                    </button>
+                                </BoxEnd>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
-            <Modal isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} width={600}>
-                {vizualizarModal === 'CriarProduto' ? <CriarProduto /> : <AtualizarProduto dataProduto={dataProduto} />}
+            <BoxHeader>
+                <Pagination
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
+                />
+            </BoxHeader>
+
+            <Modal isOpen={openModal} setOpenModal={handleCloseModal} width={600}>
+                {vizualizarModal === 'CriarProduto' ? <CriarProduto onClose={handleCloseModal} /> : <AtualizarProduto dataProduto={dataProduto} onClose={handleCloseModal} />}
             </Modal>
         </Container>
     );

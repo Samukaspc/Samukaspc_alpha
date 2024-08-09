@@ -1,16 +1,22 @@
-import axios from "axios";
+import React, { useRef, useState } from 'react';
 import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from "./styled";
+import { criarProduto } from '../../../service';
 
-export default function CriarProduto() {
+export default function CriarProduto({ onClose }) {
+    const nameRef = useRef(null);
+    const descriptionRef = useRef(null);
+    const priceRef = useRef(null);
+    const stockRef = useRef(null);
+    const [buttonClicked, setButtonClicked] = useState('');
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         
-        const formData = new FormData(event.target);
         const data = {
-            name: formData.get('name'),
-            description: formData.get('description'),
-            price: parseFloat(formData.get('price')),
-            stock: parseInt(formData.get('stock'), 10)
+            name: nameRef.current.value,
+            description: descriptionRef.current.value,
+            price: parseFloat(priceRef.current.value.replace(',', '.')),
+            stock: parseInt(stockRef.current.value, 10)
         };
     
         const token = localStorage.getItem('token');
@@ -20,23 +26,24 @@ export default function CriarProduto() {
         }
     
         try {
-            await axios.post(
-                'https://interview.t-alpha.com.br/api/products/create-product',
-                data, 
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}` 
-                    }
-                }
-            );
+            await criarProduto(data, token);
+    
+            nameRef.current.value = '';
+            descriptionRef.current.value = '';
+            priceRef.current.value = '';
+            stockRef.current.value = '';
     
             alert('Produto cadastrado com sucesso!');
+    
+            if (buttonClicked === 'saveAndExit' && onClose) {
+                onClose();
+            }
         } catch (error) {
             console.error('Erro ao fazer cadastro:', error);
             alert('Erro ao fazer cadastro, tente novamente');
         }
     };
+
     const formatPreco = (event) => {
         const input = event.target;
         let value = parseFloat(input.value.replace(',', '.'));
@@ -52,29 +59,38 @@ export default function CriarProduto() {
                 <Box>
                     <BoxStart>
                         <span>Nome do Produto</span>
-                        <input required id="name" name="name" type="text" placeholder="Nome do Produto" />
+                        <input ref={nameRef} required id="name" name="name" type="text" placeholder="Nome do Produto" />
                         <span>Descrição</span>
-                        <textarea required id="description" name="description" type="text" placeholder="Descrição" rows="6" />
+                        <textarea ref={descriptionRef} required id="description" name="description" type="text" placeholder="Descrição" rows="6" />
                         <BoxForm>
                             <BoxSpan>
                                 <span>Preço</span>
                                 <BoxInput>
-                                    <input required id="price" name="price" type="text" placeholder="Preço" step="0.01" min="0" onBlur={formatPreco} />
+                                    <input ref={priceRef} required id="price" name="price" type="text" placeholder="Preço" step="0.01" min="0" onBlur={formatPreco} />
                                 </BoxInput>
                             </BoxSpan>
                             <BoxSpan>
                                 <span>Quantidade em estoque</span>
                                 <BoxInput>
-                                    <input required id="stock" name="stock" type="number" placeholder="150" min="0" />
+                                    <input ref={stockRef} required id="stock" name="stock" type="number" placeholder="150" min="0" />
                                 </BoxInput>
                             </BoxSpan>
                         </BoxForm>
                     </BoxStart>
                 </Box>
                 <BoxButton>
-                    <button type="submit">Salvar</button>
-                    <button type="submit">Salvar e sair</button>
-
+                    <button
+                        type="submit"
+                        onClick={() => setButtonClicked('saveAndExit')}
+                    >
+                        Salvar e sair
+                    </button>
+                    <button
+                        type="submit"
+                        onClick={() => setButtonClicked('save')}
+                    >
+                        Salvar
+                    </button>
                 </BoxButton>
             </form>
         </Container>

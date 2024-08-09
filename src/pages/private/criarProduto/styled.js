@@ -1,71 +1,118 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
-    justify-content: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    
     a {
         text-decoration: none;
         color: #fafafa;
     }
-`
+`;
 
 export const Box = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-top: 20px;
-    gap: 10px;
-    input {
-        padding: 10px;
-        border: 1px solid #000;
-        border-radius: 5px;
-        width: 300px;
-    }
-    justify-content: center;
-    `
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+`;
 
 export const BoxStart = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: start;
+    width: 100%;
     gap: 10px;
-    textArea {
+    
+    textarea {
         padding: 10px;
-        border: 1px solid #000;
+        border: 1px solid #ddd;
         border-radius: 5px;
-        max-width: 300px;
-        min-width: 300px;
+        resize: vertical;
+        min-height: 100px;
     }
-`
+    
+    input[type="text"], input[type="number"] {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    span {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        text-align: left;
+    }
+`;
+
 export const BoxButton = styled.div`
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
     
     button {
-        padding: 10px;
         margin: 5px;
-        background-color: blue;
-        color: #fff;
-        border-radius: 10px;
+        border: none;
+        border-radius: 5px;
         cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
         width: 150px;
-        justify-content: center;
+        height: 40px;
     }
- `
+    
+    button:first-of-type {
+        background-color: #007bff;
+        color: #fff;
+        
+        &:hover {
+            background-color: #0056b3;
+        }
+    }
+    
+    button:last-of-type {
+        background-color: #28a745;
+        color: #fff;
+        
+        &:hover {
+            background-color: #218838;
+        }
+    }
+`;
 
- export const BoxInput = styled.div`
+export const BoxInput = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    
     input {
-        width: 135px;
+        width: 100%;
     }
-    `
+`;
+
 export const BoxSpan = styled.div`
     display: flex;
     flex-direction: column;
     align-items: start;
-  
-  `
-export const BoxForm = styled.div`
-    gap: 10px;
-    display: flex;
-`
+    width: 100%;
+`;
 
+export const BoxForm = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    
+    @media (min-width: 600px) {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+`;

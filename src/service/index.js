@@ -1,5 +1,6 @@
 import axios from 'axios';
 const apiUrl = 'https://interview.t-alpha.com.br/api/products';
+const apiUrlAuth = 'https://interview.t-alpha.com.br/api/auth';
 
 
 export const updateProduct = async (dataProduto, data) => {
@@ -27,6 +28,23 @@ export const updateProduct = async (dataProduto, data) => {
     }
 };
 
+export const criarProduto = async (data, token) => {
+    try {
+        const response = await axios.post(
+            `${apiUrl}/create-product`,
+            data,
+            {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        );
+        return response.data;
+    } catch (error) {
+        throw new Error('Erro ao criar produto');
+    }
+};
 
 
 export const buscarProdutos = async (token) => {
@@ -60,3 +78,18 @@ export const deletarProduto = async (id, token) => {
         throw new Error('Erro ao deletar produto');
     }
 };
+export const login = async (taxNumber, password) => {
+    try {
+        const response = await axios.post(`${apiUrlAuth}/login`, {
+            taxNumber,
+            password,
+        });
+
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        throw new Error('Erro ao fazer login, tente novamente');
+    }
+};
+
+
