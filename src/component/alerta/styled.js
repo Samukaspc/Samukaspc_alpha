@@ -9,7 +9,6 @@ export const AlertContainer = styled.div`
   background-color: ${({ type }) =>
     type === 'error' ? '#f44336' :
     type === 'warning' ? '#ff9800' : '#4caf50'};
-  margin-bottom: 16px;
   position: absolute;
   margin : 10px;
   right: 0;
@@ -17,7 +16,6 @@ export const AlertContainer = styled.div`
 `;
 
 export const Icon = styled.span`
-  margin-right: 8px;
   font-size: 20px;
   border: none; 
   background: none; 

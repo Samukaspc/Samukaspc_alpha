@@ -3,10 +3,11 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     text-align: center;
+    height: 90vh;
     width: 100%;
-    height: 100vh;
     justify-content: center;
-    `
+`;
+
 
 export const Box = styled.div`
     display: flex;
@@ -32,10 +33,14 @@ export const BoxButton = styled.div`
         background-color: blue;
         color: #fff;
         border: 1px solid #000;
+        border: none;
         border-radius: 10px;
         cursor: pointer;
         width: 325px;
         justify-content: center;
+        &:hover {
+            background-color: #888;
+        }
     }
     a {
         text-decoration: none;

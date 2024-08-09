@@ -34,9 +34,8 @@ export default function Login() {
 
     return (
         <Container>
-            {alert.message && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
-            
             <form onSubmit={handleSubmit}>
+            {alert.message && <Alert type={alert.type} message={alert.message} onClose={closeAlert} />}
                 <img src={logo} alt="Logo" width={200} />
                 <Box>
                     <BoxStart>
@@ -61,8 +60,8 @@ export default function Login() {
                         <button type="submit">Login</button>
                     </BoxButton>
                     <BoxCadastro>
-                        <span>Ainda não possui cadastro? </span>
-                        <a href="/cadastro">Clique aqui e cadastre-se</a>
+                        <span>Ainda não possui cadastro?</span>
+                        <a href="/cadastro">  Clique aqui e cadastre-se</a>
                     </BoxCadastro>
                 </Box>
             </form>

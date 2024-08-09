@@ -13,40 +13,53 @@ export default function CriarProduto({ onClose }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+    
+        const rawPrice = priceRef.current.value.replace(',', '.');
+        const price = parseFloat(rawPrice);
+        const stock = parseInt(stockRef.current.value, 10);
+    
+        if (isNaN(price) || price <= 0) {
+            setAlert({ type: 'error', message: 'Preço inválido. Por favor, informe somente números' });
+            return;
+        }
+    
+        if (isNaN(stock) || stock < 0) {
+            setAlert({ type: 'error', message: 'Quantidade de estoque inválida. Por favor, insira um valor válido.' });
+            return;
+        }
+    
         const data = {
             name: nameRef.current.value,
             description: descriptionRef.current.value,
-            price: parseFloat(priceRef.current.value.replace(',', '.')),
-            stock: parseInt(stockRef.current.value, 10)
+            price: price,
+            stock: stock
         };
-
+    
         const token = localStorage.getItem('token');
         if (!token) {
             setAlert({ type: 'error', message: 'Token de autenticação não encontrado. Por favor, faça o login novamente.' });
-            return; 
+            return;
         }
-
+    
         try {
             await criarProduto(data, token);
-
-            // Limpa os campos após o sucesso
+    
             nameRef.current.value = '';
             descriptionRef.current.value = '';
             priceRef.current.value = '';
             stockRef.current.value = '';
-
-            // Define mensagem de sucesso
+    
             setAlert({ type: 'success', message: 'Produto cadastrado com sucesso!' });
-
+    
             if (buttonClicked === 'saveAndExit' && onClose) {
                 onClose();
             }
         } catch (error) {
             console.error('Erro ao fazer cadastro:', error);
-            setAlert({ type: 'error', message: 'Erro ao fazer cadastro, tente novamente' });
+            setAlert({ type: 'error', message: 'Erro ao fazer cadastro, tente novamente.' });
         }
     };
+    
 
     const formatPreco = (event) => {
         const input = event.target;

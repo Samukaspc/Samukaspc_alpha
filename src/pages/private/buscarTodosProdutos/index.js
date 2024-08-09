@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { BoxEnd, BoxHeader, Container, Table, SearchBox, Header } from './styled';
+import { BoxEnd, BoxHeader, Container, Table, SearchBox, Header, ContainerLoading } from './styled';
 import { MdDelete, MdEditSquare, MdSearch } from 'react-icons/md';
 import CriarProduto from '../criarProduto';
 import AtualizarProduto from '../atualizarProduto';
@@ -7,6 +7,7 @@ import { buscarProdutoId, buscarProdutos, deletarProduto } from '../../../servic
 import Pagination from '../../../component/paginacao';
 import Modal from '../../../component/modal';
 import { useNavigate } from 'react-router-dom';
+import Loading from '../../../component/loading';
 
 export default function BuscarTodosProdutos() {
     const [produtos, setProdutos] = useState([]);
@@ -19,8 +20,7 @@ export default function BuscarTodosProdutos() {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage] = useState(5);
     const token = localStorage.getItem('token');
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
 
     const handleBuscarProdutos = useCallback(async () => {
         try {
@@ -84,11 +84,11 @@ export default function BuscarTodosProdutos() {
 
     const desconectarUsuario = () => {
         const currentItems = produtos.slice(indexOfFirstItem, indexOfLastItem);
-        
+
         if (currentItems.length === 1) {
-            handleBuscarProdutos()
+            handleBuscarProdutos();
         } else {
-            navigate('/')
+            navigate('/');
         }
     };
 
@@ -98,7 +98,7 @@ export default function BuscarTodosProdutos() {
     const totalPages = Math.ceil(produtos.length / itemsPerPage);
 
     if (loading) {
-        return <Container><h1>Carregando...</h1></Container>;
+        return <ContainerLoading><Loading /></ContainerLoading>;
     }
 
     if (error) {
@@ -123,9 +123,8 @@ export default function BuscarTodosProdutos() {
                     />
                     <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
                 </SearchBox>
-                <button onClick={desconectarUsuario} >{produtos.length === 1 ? 'Voltar' : 'Sair'}</button>
+                <button onClick={desconectarUsuario}>{produtos.length === 1 ? 'Voltar' : 'Sair'}</button>
             </Header>
-
 
             <Table>
                 <thead>
@@ -148,10 +147,10 @@ export default function BuscarTodosProdutos() {
                             <td>{produto.stock}</td>
                             <td>
                                 <BoxEnd>
-                                    <button onClick={() => handleDeleteProduct(produto.id)} >
+                                    <button onClick={() => handleDeleteProduct(produto.id)}>
                                         <MdDelete color={'#ff0000'} size={24} />
                                     </button>
-                                    <button onClick={() => handleEditProduct(produto)} >
+                                    <button onClick={() => handleEditProduct(produto)}>
                                         <MdEditSquare color={'#008000'} size={24} />
                                     </button>
                                 </BoxEnd>
