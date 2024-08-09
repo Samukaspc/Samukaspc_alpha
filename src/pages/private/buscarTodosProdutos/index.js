@@ -94,8 +94,6 @@ export default function BuscarTodosProdutos() {
         setCurrentPage(newPage);
     };
 
-
-
     if (loading) {
         return <ContainerLoading><Loading /></ContainerLoading>;
     }
@@ -103,11 +101,6 @@ export default function BuscarTodosProdutos() {
     if (error) {
         return <Container><h1>{error}</h1></Container>;
     }
-
-    if (produtos.length === 0) {
-        return <Container><h1>Nenhum produto encontrado.</h1></Container>;
-    }
-
     return (
         <ContainerPai>
             <Container>
@@ -160,11 +153,13 @@ export default function BuscarTodosProdutos() {
                     </tbody>
                 </Table>
                 <BoxHeader>
+                    {produtos.length > 0 && 
                     <Pagination
-                        currentPage={currentPage}
-                        totalPages={totalPages}
-                        onPageChange={handlePageChange}
+                    currentPage={currentPage}
+                    totalPages={totalPages}
+                    onPageChange={handlePageChange}
                     />
+                }
                 </BoxHeader>
 
                 <Modal isOpen={openModal} setOpenModal={handleCloseModal} width={600}>
