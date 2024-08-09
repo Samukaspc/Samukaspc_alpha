@@ -7,4 +7,6 @@ export const PaginationContainer = styled.div`
 
 export const PaginationButton = styled.button`
     display: flex;
+    justify-content: center;    
+    align-items: center;
 `;

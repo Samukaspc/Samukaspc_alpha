@@ -31,7 +31,6 @@ export const Container = styled.div`
         background-color: #005eff;
         color: white;
         border: none;
-        height: 40px;
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
@@ -46,7 +45,7 @@ export const Container = styled.div`
 
     h2 {
         text-align: center;
-        color: #333;
+        color: #fff
     }
     
    
@@ -79,9 +78,10 @@ export const Table = styled.table`
         }
         }
     }
-
+    
     thead th {
-        background-color: transparent; 
+        color: #ffffff;
+        background-color: #0000ff; 
         width: 100px;
     }
 
@@ -114,9 +114,6 @@ export const BoxHeader = styled.div`
     margin-bottom: 20px;
     height: 100%;
     justify-content: center;
-    
-    
-    
 `;
 
 
@@ -133,7 +130,7 @@ export const SearchBox = styled.div`
         border: none;
         border-radius: 5px;
         height: 20px;
-        width: 150px;
+        width: 200px;
         padding: 10px;
         text-align: start;
         &:focus {
@@ -150,77 +147,11 @@ export const SearchBox = styled.div`
 `;
 
 
-export const Header = styled.div`
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-     button {
-        background-color: #0000ff;
-        border: none;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        &:hover {
-            background-color: #888;
-        }
-    }
-`
-
-export const BoxIcon = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-`
 export const BoxHeaderButton = styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
 `
 
-export  const HeaderTitulo = styled.div`
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    border-radius: 10px;
-    background-color: #0000ff;
-    padding: 10px;
-    color: white;
-    align-items: center;
-    justify-content: space-between;
-    h2 {
-        color: white;
-        width: 100%;
-    }
-   
-`
-export  const HeaderLogo = styled.div`
-    display: flex;
-    width: 50px;
-    flex-direction: row;
-    border-radius: 10px;
-    background-color: #0000ff;
-    padding: 10px;
-    align-items: center;
-    justify-content: center;
-`
 
-export const BoxTop = styled.div`
-    display : flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 10px;
-    align-items: center;
-    button {
-        background-color: #005eff;
-        color: white;
-        border: none;
-        height: 40px;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        &:hover {
-            background-color: #888;
-        }
-    }
-`
+

@@ -6,7 +6,6 @@ export const Container = styled.div`
     align-items: center;
     text-align: center;
     padding: 20px;
-    background-color: #f4f4f4;
     
     a {
         text-decoration: none;
@@ -20,7 +19,7 @@ export const Box = styled.div`
     align-items: center;
     margin: 20px 0;
     padding: 20px;
-    background: #fff;
+
 `;
 
 export const BoxStart = styled.div`

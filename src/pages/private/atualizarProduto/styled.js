@@ -2,24 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
     text-align: center;
-    background-color: #f9f9f9;
-
-    a {
-        text-decoration: none;
-        color: #007bff;
-    }
 `;
 
 export const Box = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
     margin: 20px 0;
     padding: 20px;
-    background: #fff;
 `;
 export const BoxStart = styled.div`
     display: flex;
@@ -32,7 +21,6 @@ export const BoxStart = styled.div`
         border: 1px solid #ddd;
         border-radius: 5px;
         resize: vertical;
-        min-height: 120px;
         width: 100%;
         box-sizing: border-box;
     }

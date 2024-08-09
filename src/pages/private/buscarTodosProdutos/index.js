@@ -1,30 +1,32 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { BoxEnd, BoxHeader, Container, Table, SearchBox, Header, ContainerLoading, ContainerPai, BoxIcon, HeaderTitulo, HeaderLogo, BoxTop, BoxHeaderButton } from './styled';
+import { BoxEnd, BoxHeader, Container, Table, SearchBox, ContainerLoading, ContainerPai, BoxHeaderButton } from './styled';
 import { MdDelete, MdEditSquare, MdSearch } from 'react-icons/md';
 import CriarProduto from '../criarProduto';
 import AtualizarProduto from '../atualizarProduto';
 import { buscarProdutoId, buscarProdutos, deletarProduto } from '../../../service';
 import Pagination from '../../../component/paginacao';
 import Modal from '../../../component/modal';
-import { useNavigate } from 'react-router-dom';
 import Loading from '../../../component/loading';
-import { ImExit } from 'react-icons/im';
 import { IoIosClose } from 'react-icons/io';
-import logoImg from '../../../image/logo.png';
+import HeaderComponente from './headerComponente';
 
 export default function BuscarTodosProdutos() {
+    const [itemsPerPage] = useState(10);
+    const [error, setError] = useState(null);
     const [produtos, setProdutos] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
     const [produtoId, setProdutoId] = useState('');
-    const [openModal, setOpenModal] = useState(false);
-    const [vizualizarModal, setVizualizarModal] = useState('');
-    const [dataProduto, setDataProduto] = useState({});
     const [currentPage, setCurrentPage] = useState(1);
-    const [itemsPerPage] = useState(5);
-    const token = localStorage.getItem('token');
-    const navigate = useNavigate();
+    const [openModal, setOpenModal] = useState(false);
+    const [dataProduto, setDataProduto] = useState({});
     const [mostraricon, setMostrarIcon] = useState(false);
+    const [vizualizarModal, setVizualizarModal] = useState('');
+
+    const token = localStorage.getItem('token');
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const totalPages = Math.ceil(produtos.length / itemsPerPage);
+    const currentItems = produtos.slice(indexOfFirstItem, indexOfLastItem);
 
     const handleBuscarProdutos = useCallback(async () => {
         try {
@@ -92,14 +94,7 @@ export default function BuscarTodosProdutos() {
         setCurrentPage(newPage);
     };
 
-    const desconectarUsuario = () => {
-        navigate('/');
-    };
 
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = produtos.slice(indexOfFirstItem, indexOfLastItem);
-    const totalPages = Math.ceil(produtos.length / itemsPerPage);
 
     if (loading) {
         return <ContainerLoading><Loading /></ContainerLoading>;
@@ -116,27 +111,13 @@ export default function BuscarTodosProdutos() {
     return (
         <ContainerPai>
             <Container>
-                <BoxTop>
-                    <HeaderLogo>
-                        <img src={logoImg} alt="Logo" width={50} />
-                    </HeaderLogo>
-                    <HeaderTitulo>
-                        <h2>Tabela de produtos</h2>
-                        <button onClick={desconectarUsuario}>
-                            <BoxIcon>
-                                <ImExit scale={30} />
-                                <span>Sair</span>
-                            </BoxIcon>
-                        </button>
-                    </HeaderTitulo>
-                </BoxTop>
-
+                <HeaderComponente />
                 <BoxHeaderButton>
                     <button onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar Produto</button>
                     <SearchBox>
                         <input
                             type="text"
-                            placeholder="Pesquisar Produto"
+                            placeholder="Pesquisar código do produto"
                             value={produtoId}
                             onChange={(e) => setProdutoId(e.target.value)}
                         />
@@ -147,16 +128,12 @@ export default function BuscarTodosProdutos() {
                                 <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
                             )}
                     </SearchBox>
-
                 </BoxHeaderButton>
-                <Header>
-
-                </Header>
 
                 <Table>
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>Código</th>
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Preço</th>
@@ -195,7 +172,10 @@ export default function BuscarTodosProdutos() {
                 </BoxHeader>
 
                 <Modal isOpen={openModal} setOpenModal={handleCloseModal} width={600}>
-                    {vizualizarModal === 'CriarProduto' ? <CriarProduto onClose={handleCloseModal} /> : <AtualizarProduto dataProduto={dataProduto} onClose={handleCloseModal} />}
+                    {vizualizarModal === 'CriarProduto' ?
+                        <CriarProduto onClose={handleCloseModal} /> :
+                        <AtualizarProduto dataProduto={dataProduto} onClose={handleCloseModal} />
+                    }
                 </Modal>
             </Container>
         </ContainerPai>
