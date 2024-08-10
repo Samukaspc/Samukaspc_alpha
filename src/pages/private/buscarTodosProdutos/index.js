@@ -23,6 +23,7 @@ export default function BuscarTodosProdutos() {
     const [dataProduto, setDataProduto] = useState({});
     const [mostraricon, setMostrarIcon] = useState(false);
     const [vizualizarModal, setVizualizarModal] = useState('');
+    const [disabledIcon, setDisabledIcon] = useState(false);
 
     const token = localStorage.getItem('token');
     const indexOfLastItem = currentPage * itemsPerPage;
@@ -74,6 +75,7 @@ export default function BuscarTodosProdutos() {
     };
 
     const handleDeleteProduct = async (id) => {
+        setDisabledIcon(true);
         try {
             await deletarProduto(id, token);
             setProdutos(produtos.filter((produto) => produto.id !== id));
@@ -84,8 +86,10 @@ export default function BuscarTodosProdutos() {
             }
         } catch (error) {
             setError(error.message);
+        } finally {
+            setDisabledIcon(false);
         }
-    };
+    }
 
     const handleCloseModal = () => {
         setOpenModal(false);
@@ -97,7 +101,7 @@ export default function BuscarTodosProdutos() {
     };
 
     if (loading) {
-        return <ContainerLoading><Loading /></ContainerLoading>;
+        return <ContainerLoading><Loading texto={true} /></ContainerLoading>;
     }
 
     if (error) {
@@ -109,14 +113,14 @@ export default function BuscarTodosProdutos() {
                 <HeaderComponente />
                 <Box>
                     <BoxHeaderButton>
-                        <Button  cor={'#5d46e2'} width={'200px'} onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar Produto</Button>
+                        <Button cor={'#5d46e2'} width={'200px'} onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar Produto</Button>
                         <SearchBox>
                             <Input width={'200px'} type="text" placeholder="Pesquisar código do produto" value={produtoId} onChange={(e) => setProdutoId(e.target.value)} />
                             {mostraricon ?
                                 (
-                                    <IoIosClose color={"#5d46e2"} size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos(); setProdutoId('') }}  />
+                                    <IoIosClose color={"#5d46e2"} size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos(); setProdutoId('') }} />
                                 ) : (
-                                    <MdSearch color={"#5d46e2"} size={24} onClick={handleBuscarProduto}  />
+                                    <MdSearch color={"#5d46e2"} size={24} onClick={handleBuscarProduto} />
                                 )}
                         </SearchBox>
                     </BoxHeaderButton>
@@ -143,7 +147,11 @@ export default function BuscarTodosProdutos() {
                                 <td>{produto.stock}</td>
                                 <td>
                                     <BoxEnd>
-                                        <MdDelete color={'#ff0000'} size={24} onClick={() => handleDeleteProduct(produto.id)} />
+                                        {disabledIcon ?
+                                         <Loading width={'8px'}/>
+                                          :
+                                            <MdDelete color={'#ff0000'} size={24} onClick={() => handleDeleteProduct(produto.id)} />
+                                        }
                                         <MdEditSquare color={'#5d46e2'} size={24} onClick={() => handleEditProduct(produto)} />
                                     </BoxEnd>
                                 </td>

@@ -3,6 +3,9 @@ import styled from "styled-components";
 export const Container = styled.div`
     display: flex;
     text-align: center;
+    h1 {
+        margin-top: 20px;
+    }
 `;
 
 export const Box = styled.div`
@@ -38,11 +41,13 @@ export const BoxStart = styled.div`
         margin-bottom: 8px;
         text-align: left;
     }
+
 `;
 
 export const BoxButton = styled.div`
     display: flex;
     justify-content: center;
+
 `;
 
 export const BoxInput = styled.div`
@@ -54,6 +59,7 @@ export const BoxInput = styled.div`
     input {
         width: 100%;
     }
+
 `;
 
 export const BoxSpan = styled.div`
@@ -61,6 +67,7 @@ export const BoxSpan = styled.div`
     flex-direction: column;
     align-items: start;
     width: 100%;
+
 `;
 
 export const BoxForm = styled.div`
@@ -72,5 +79,7 @@ export const BoxForm = styled.div`
     @media (min-width: 600px) {
         flex-direction: row;
         justify-content: space-between;
+
     }
+
 `;

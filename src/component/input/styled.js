@@ -10,6 +10,7 @@ width: 100%;
     width: ${props => props.width ? props.width : '100%'};
     @media(max-width: 768px) {
       width: 100%;
+      min-width: 200px;
     }
     }
   input:focus {

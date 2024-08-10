@@ -8,7 +8,7 @@ export const Bakcground = styled.div`
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
-`
+    `
 
 export const ModalBox = styled.div`
     position: fixed;
@@ -16,7 +16,7 @@ export const ModalBox = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: #f4f4f4;
-
+    
     border-radius: 5px;
     z-index: 999;
     display: flex;
@@ -36,5 +36,9 @@ export const BoxSvg = styled.div`
         &:hover {
             color: red;
         }
+    }
+    @media(max-width: 768px) {
+        right: 0px;
+        top: 0px;
     }
 `

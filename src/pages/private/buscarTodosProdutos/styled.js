@@ -108,6 +108,10 @@ export const BoxEnd = styled.div`
     svg {
         margin: 0 5px;
     }
+    .sc-eytLVj {
+        margin-bottom: 20px;
+    }
+   
 `;
 export const SearchBox = styled.div`
     display: flex;

@@ -17,6 +17,8 @@ export const BoxButton = styled.div`
         }
         @media(max-width: 768px) {
             width: 100%;
+            padding: 10px;
+            min-width: 110px;
         }
     }
   
