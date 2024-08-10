@@ -1,6 +1,9 @@
 import { Container } from "./styled";
 
-export default function Input({ type, name, id, placeholder, required,value,onChange,width }) {
+export default function Input({ 
+    type, name, id, placeholder,required,value,
+    onChange,width, ref,onBlur,min,step 
+    }) {
     return (
         <Container width={width} >
             <input
@@ -11,7 +14,13 @@ export default function Input({ type, name, id, placeholder, required,value,onCh
                 required={required}
                 value={value}
                 onChange={onChange}
-            />
+                ref={ref}
+                onBlur={onBlur}
+                min={min}
+                step={step}
+                />
         </Container>
     );
 }
+
+    

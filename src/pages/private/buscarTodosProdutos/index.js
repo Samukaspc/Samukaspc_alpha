@@ -114,9 +114,9 @@ export default function BuscarTodosProdutos() {
                             <Input width={'200px'} type="text" placeholder="Pesquisar código do produto" value={produtoId} onChange={(e) => setProdutoId(e.target.value)} />
                             {mostraricon ?
                                 (
-                                    <IoIosClose size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos(); setProdutoId('') }} style={{ cursor: 'pointer', color: '#007bff' }} />
+                                    <IoIosClose color={"#5d46e2"} size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos(); setProdutoId('') }}  />
                                 ) : (
-                                    <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
+                                    <MdSearch color={"#5d46e2"} size={24} onClick={handleBuscarProduto}  />
                                 )}
                         </SearchBox>
                     </BoxHeaderButton>

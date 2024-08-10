@@ -43,6 +43,7 @@ export const BoxStart = styled.div`
 export const BoxButton = styled.div`
     display: flex;
     justify-content: center;
+    gap: 10px;
 `;
 
 export const BoxInput = styled.div`
@@ -61,7 +62,7 @@ export const BoxSpan = styled.div`
 export const BoxForm = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     width: 100%;
     @media (min-width: 600px) {
         flex-direction: row;

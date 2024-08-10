@@ -105,6 +105,9 @@ export const BoxEnd = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    svg {
+        margin: 0 5px;
+    }
 `;
 export const SearchBox = styled.div`
     display: flex;

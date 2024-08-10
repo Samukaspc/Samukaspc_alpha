@@ -3,6 +3,7 @@ import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from 
 import { atualizarProduto } from '../../../service';
 import Alert from '../../../component/alerta';
 import Button from '../../../component/button';
+import Input from '../../../component/input';
 
 export default function AtualizarProduto({ dataProduto, onClose }) {
     const [buttonClicked, setButtonClicked] = useState('');
@@ -57,20 +58,20 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
                 <Box>
                     <BoxStart>
                         <span>Nome do Produto</span>
-                        <input required id="name" name="name" type="text" placeholder="Nome do Produto" />
+                        <Input required id="name" name="name" type="text" placeholder="Nome do Produto" />
                         <span>Descrição</span>
                         <textarea required id="description" name="description" type="text" placeholder="Descrição" rows="6" />
                         <BoxForm>
                             <BoxSpan>
                                 <span>Preço</span>
                                 <BoxInput>
-                                    <input required id="price" name="price" type="text" placeholder="Preço" step="0.01" min="0" onBlur={formatPreco} />
+                                    <Input required id="price" name="price" type="text" placeholder="Preço" step="0.01" min="0" onBlur={formatPreco} />
                                 </BoxInput>
                             </BoxSpan>
                             <BoxSpan>
                                 <span>Quantidade em estoque</span>
                                 <BoxInput>
-                                    <input required id="stock" name="stock" type="number" placeholder="150" min="0" />
+                                    <Input required id="stock" name="stock" type="number" placeholder="150" min="0" />
                                 </BoxInput>
                             </BoxSpan>
                         </BoxForm>
@@ -78,6 +79,7 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
                 </Box>
                 <BoxButton>
                     <Button 
+                        width={'150px'}
                         type="submit"
                         onClick={() => setButtonClicked('saveAndExit')}
                     >

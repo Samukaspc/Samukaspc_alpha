@@ -12,6 +12,8 @@ export const PaginationButton = styled.button`
     border: none;
     display: flex;
     justify-content: center;    
+    color: #fff;
+    font-weight: bold;
     align-items: center;
     background-color: #5d46e2;
     cursor: pointer;    

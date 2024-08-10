@@ -3,6 +3,7 @@ import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from 
 import { criarProduto } from '../../../service';
 import Alert from '../../../component/alerta';
 import Button from '../../../component/button';
+import Input from '../../../component/input';
 
 export default function CriarProduto({ onClose }) {
     const nameRef = useRef(null);
@@ -80,20 +81,36 @@ export default function CriarProduto({ onClose }) {
                 <Box>
                     <BoxStart>
                         <span>Nome do Produto</span>
-                        <input ref={nameRef} required id="name" name="name" type="text" placeholder="Nome do Produto" />
+                        <Input width={"360px"} ref={nameRef} required id="name" name="name" type="text" placeholder="Nome do Produto" />
                         <span>Descrição</span>
                         <textarea ref={descriptionRef} required id="description" name="description" type="text" placeholder="Descrição" rows="6" />
                         <BoxForm>
                             <BoxSpan>
                                 <span>Preço</span>
                                 <BoxInput>
-                                    <input ref={priceRef} required id="price" name="price" type="text" placeholder="Preço" step="0.01" min="0" onBlur={formatPreco} />
+                                    <Input 
+                                        width={"160px"}
+                                        ref={priceRef}
+                                        required id="price"
+                                        name="price" type="text"
+                                        placeholder="Preço"
+                                        step="0.01" min="0"
+                                        onBlur={formatPreco} />  
                                 </BoxInput>
                             </BoxSpan>
                             <BoxSpan>
                                 <span>Quantidade em estoque</span>
                                 <BoxInput>
-                                    <input ref={stockRef} required id="stock" name="stock" type="number" placeholder="150" min="0" />
+                                    <Input 
+                                        width={"160px"} 
+                                        type="number" 
+                                        ref={stockRef} 
+                                        required 
+                                        id="stock" 
+                                        name="stock" 
+                                        placeholder="150" 
+                                        min="0"
+                                    />
                                 </BoxInput>
                             </BoxSpan>
                         </BoxForm>
@@ -101,12 +118,16 @@ export default function CriarProduto({ onClose }) {
                 </Box>
                 <BoxButton>
                     <Button 
+                        width={"180px"}
+                        cor={"#5d46e2"}
                         type="submit"
                         onClick={() => setButtonClicked('saveAndExit')}
                     >
                         Salvar e sair
                     </Button>
                     <Button 
+                        width={"180px"}
+                        cor={"#5d46e2"}
                         type="submit"
                         onClick={() => setButtonClicked('save')}
                     >

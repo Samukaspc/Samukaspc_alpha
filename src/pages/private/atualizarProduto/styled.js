@@ -44,41 +44,6 @@ export const BoxStart = styled.div`
 export const BoxButton = styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 20px;
-
-    button {
-        padding: 12px 20px;
-        margin: 0 5px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-        transition: background-color 0.3s, box-shadow 0.3s;
-        width: 150px;
-        height: 45px;
-    }
-
-    button:first-of-type {
-        background-color: #007bff;
-        color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-        &:hover {
-            background-color: #0056b3;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-        }
-    }
-
-    button:last-of-type {
-        background-color: #28a745;
-        color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-
-        &:hover {
-            background-color: #218838;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
-        }
-    }
 `;
 
 export const BoxInput = styled.div`
@@ -102,7 +67,7 @@ export const BoxSpan = styled.div`
 export const BoxForm = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     width: 100%;
 
     @media (min-width: 600px) {
