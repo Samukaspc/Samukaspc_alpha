@@ -111,20 +111,17 @@ export const BoxEnd = styled.div`
 `;
 export const SearchBox = styled.div`
     display: flex;
-    align-items: end;
     position: relative;
     svg {
         position: absolute;
         right: 10px;
-        top: 20px;
+        top: 10px;
     }
 `;
 export const Box = styled.div`
     display: flex;
     width: 100%;
 `
-
-
 export const BoxHeaderButton = styled.div`
     display: flex;
     flex-direction: row;
@@ -133,9 +130,7 @@ export const BoxHeaderButton = styled.div`
     @media(max-width: 800px) {
         flex-direction: column;
         gap: 10px;
-        input {
-            width: 100%;
-        }
+
     }
 `
 

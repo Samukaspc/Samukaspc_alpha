@@ -30,34 +30,12 @@ export const BoxStart = styled.div`
     align-items: start;
     gap: 10px;
 `
-export const AletaError = styled.div`
+export const BoxButton = styled.div`
     display: flex;
-    border-radius: 5px;
-    padding: 10px;
-    border-radius:  none;
-    width: 200px;
+    gap: 10px;
+    margin-top: 20px;
     justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: red;
-    font-size: 15px;
 `
 
-export const BoxSuccess = styled.div`
-    display: flex;
-    border-radius: 5px;
-    padding: 10px;
-    border-radius:  none;
-    width: 200px;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: green;
-    font-size: 15px;
-`
 
 

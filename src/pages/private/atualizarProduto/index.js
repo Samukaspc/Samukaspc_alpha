@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from './styled';
-import { atualizarProduto } from '../../../service';
+import { atualizarProduto } from '../../../service/produtoService';
 import Alert from '../../../component/alerta';
 import Button from '../../../component/button';
 import Input from '../../../component/input';
@@ -79,7 +79,8 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
                 </Box>
                 <BoxButton>
                     <Button 
-                        width={'150px'}
+                        cor={'#5d46e2'}
+                        width={'200px'}
                         type="submit"
                         onClick={() => setButtonClicked('saveAndExit')}
                     >

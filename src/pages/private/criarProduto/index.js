@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from "./styled";
-import { criarProduto } from '../../../service';
+import { criarProduto } from '../../../service/produtoService';
 import Alert from '../../../component/alerta';
 import Button from '../../../component/button';
 import Input from '../../../component/input';

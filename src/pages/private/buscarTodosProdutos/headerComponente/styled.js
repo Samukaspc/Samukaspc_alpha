@@ -49,7 +49,6 @@ export  const HeaderTitulo = styled.div`
     }
    
 `
-
 export const BoxIcon = styled.div`
     display: flex;
     justify-content: center;

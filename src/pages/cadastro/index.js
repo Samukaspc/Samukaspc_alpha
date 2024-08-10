@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Box, BoxStart, Container } from './styled';
+import { Box, BoxButton, BoxStart, Container } from './styled';
 import { useNavigate } from 'react-router-dom';
 import Alert from '../../component/alerta';
 import Input from '../../component/input';
 import Button from '../../component/button';
-import { registrar } from '../../service';
+import { registrar } from '../../service/autenticacaoService';
 
 export default function Cadastro() {
     const navigate = useNavigate();
@@ -78,8 +78,10 @@ export default function Cadastro() {
                         <Input width={'300px'} required id="confirmPassword" name="confirmPassword" type="password" placeholder="*************" />
                     </BoxStart>
                 </Box>
-                <Button width={'325px'} type={'submit'} onClick={() => navigate('/')} >Voltar</Button>
-                <Button width={'325px'} type={'submit'} >Cadastrar</Button>
+                <BoxButton>
+                    <Button width={'325px'} type={'submit'} onClick={() => navigate('/')} >Voltar</Button>
+                    <Button width={'325px'} type={'submit'} >Cadastrar</Button>
+                </BoxButton>
             </form>
         </Container>
     );

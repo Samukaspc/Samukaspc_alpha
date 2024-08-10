@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box, BoxCadastro, BoxStart, Container } from './styled';
 import logo from '../../image/login.png';
 import { useNavigate } from 'react-router-dom';
-import { login } from '../../service';
+import { login } from '../../service/autenticacaoService';
 import Alert from '../../component/alerta';
 import Button from '../../component/button';
 import Input from '../../component/input';

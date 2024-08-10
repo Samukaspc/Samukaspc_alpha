@@ -3,7 +3,7 @@ import { BoxEnd, BoxHeader, Container, Table, SearchBox, ContainerLoading, Conta
 import { MdDelete, MdEditSquare, MdSearch } from 'react-icons/md';
 import CriarProduto from '../criarProduto';
 import AtualizarProduto from '../atualizarProduto';
-import { buscarProdutoId, buscarProdutos, deletarProduto } from '../../../service';
+import { buscarProdutoId, buscarProdutos, deletarProduto } from '../../../service/produtoService';
 import Pagination from '../../../component/paginacao';
 import Modal from '../../../component/modal';
 import Loading from '../../../component/loading';
