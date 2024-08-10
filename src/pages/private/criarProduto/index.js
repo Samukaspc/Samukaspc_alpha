@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from "./styled";
 import { criarProduto } from '../../../service';
 import Alert from '../../../component/alerta';
+import Button from '../../../component/button';
 
 export default function CriarProduto({ onClose }) {
     const nameRef = useRef(null);
@@ -99,18 +100,18 @@ export default function CriarProduto({ onClose }) {
                     </BoxStart>
                 </Box>
                 <BoxButton>
-                    <button
+                    <Button 
                         type="submit"
                         onClick={() => setButtonClicked('saveAndExit')}
                     >
                         Salvar e sair
-                    </button>
-                    <button
+                    </Button>
+                    <Button 
                         type="submit"
                         onClick={() => setButtonClicked('save')}
                     >
                         Salvar
-                    </button>
+                    </Button>
                 </BoxButton>
             </form>
         </Container>

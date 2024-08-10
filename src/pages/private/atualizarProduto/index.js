@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Box, BoxButton, BoxForm, BoxInput, BoxSpan, BoxStart, Container } from './styled';
-import { updateProduct } from '../../../service';
+import { atualizarProduto } from '../../../service';
 import Alert from '../../../component/alerta';
+import Button from '../../../component/button';
 
 export default function AtualizarProduto({ dataProduto, onClose }) {
     const [buttonClicked, setButtonClicked] = useState('');
@@ -19,7 +20,7 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
         };
 
         try {
-            await updateProduct(dataProduto.id, data);
+            await atualizarProduto(dataProduto.id, data);
             setAlert({ type: 'success', message: 'Produto atualizado com sucesso!' });
 
             if (buttonClicked && onClose) {
@@ -76,12 +77,12 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
                     </BoxStart>
                 </Box>
                 <BoxButton>
-                    <button
+                    <Button 
                         type="submit"
                         onClick={() => setButtonClicked('saveAndExit')}
                     >
                         Salvar e sair
-                    </button>
+                    </Button>
                 </BoxButton>
             </form>
         </Container>

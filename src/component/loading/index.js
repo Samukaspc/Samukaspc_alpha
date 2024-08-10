@@ -1,10 +1,10 @@
-import { Spinner } from "./styled";
+import { Container, Spinner } from "./styled";
 
 export default function Loading() {
     return (
-        <div style={{ textAlign: 'center', padding: '20px' }}>
+        <Container>
             <Spinner />
             <h2>Carregando...</h2>
-        </div>
+        </Container>
     );
 }

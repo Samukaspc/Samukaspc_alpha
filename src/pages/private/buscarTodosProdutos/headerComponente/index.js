@@ -2,6 +2,7 @@ import { BoxIcon, BoxTop, Container, HeaderLogo, HeaderTitulo } from "./styled";
 import { ImExit } from 'react-icons/im';
 import logoImg from '../../../../image/logo.png';
 import { useNavigate } from "react-router-dom";
+import Button from "../../../../component/button";
 
 export default function HeaderComponente() {
     const navigate = useNavigate();
@@ -14,12 +15,12 @@ export default function HeaderComponente() {
                     </HeaderLogo>
                     <HeaderTitulo>
                         <h2>Tabela de produtos</h2>
-                        <button onClick={desconectarUsuario}>
+                        <Button cor={'#fff'} width={'60px'} onClick={desconectarUsuario} >
                             <BoxIcon>
                                 <ImExit color="#005eff" scale={30} />
                                 <span>Sair</span>
                             </BoxIcon>
-                        </button>
+                        </Button>
                     </HeaderTitulo>
                 </BoxTop>
         </Container>

@@ -1,8 +1,10 @@
 import styled from 'styled-components';
-
+export  const Container = styled.div`
+    text-align: center;
+`
 export const Spinner = styled.div`
     border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
+    border-top: 8px solid #5d46e2;
     border-radius: 50%;
     width: 60px;
     height: 60px;

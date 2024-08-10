@@ -3,7 +3,7 @@ const apiUrl = 'https://interview.t-alpha.com.br/api/products';
 const apiUrlAuth = 'https://interview.t-alpha.com.br/api/auth';
 
 
-export const updateProduct = async (id, data) => {
+export const atualizarProduto = async (id, data) => {
     const token = localStorage.getItem('token');
     if (!token) {
         return; 
@@ -107,7 +107,7 @@ export const login = async (taxNumber, password) => {
 };
 
 
-export const register = async (data) => {
+export const registrar = async (data) => {
     try {
         const response = await axios.post(`${apiUrlAuth}/register`, data);
         return response.data;

@@ -6,7 +6,16 @@ export const PaginationContainer = styled.div`
     `;
 
 export const PaginationButton = styled.button`
+    border-radius: 5px;
+    height: 40px;
+    width: 50px;
+    border: none;
     display: flex;
     justify-content: center;    
     align-items: center;
+    background-color: #5d46e2;
+    cursor: pointer;    
+    &:hover {
+        background-color: #014bbd;
+    }
 `;

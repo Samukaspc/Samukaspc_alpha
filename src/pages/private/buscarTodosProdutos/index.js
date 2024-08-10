@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { BoxEnd, BoxHeader, Container, Table, SearchBox, ContainerLoading, ContainerPai, BoxHeaderButton } from './styled';
+import { BoxEnd, BoxHeader, Container, Table, SearchBox, ContainerLoading, ContainerPai, BoxHeaderButton, Box } from './styled';
 import { MdDelete, MdEditSquare, MdSearch } from 'react-icons/md';
 import CriarProduto from '../criarProduto';
 import AtualizarProduto from '../atualizarProduto';
@@ -9,6 +9,8 @@ import Modal from '../../../component/modal';
 import Loading from '../../../component/loading';
 import { IoIosClose } from 'react-icons/io';
 import HeaderComponente from './headerComponente';
+import Button from '../../../component/button';
+import Input from '../../../component/input';
 
 export default function BuscarTodosProdutos() {
     const [itemsPerPage] = useState(10);
@@ -105,23 +107,20 @@ export default function BuscarTodosProdutos() {
         <ContainerPai>
             <Container>
                 <HeaderComponente />
-                <BoxHeaderButton>
-                    <button onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar Produto</button>
-                    <SearchBox>
-                        <input
-                            type="text"
-                            placeholder="Pesquisar código do produto"
-                            value={produtoId}
-                            onChange={(e) => setProdutoId(e.target.value)}
-                        />
-                        {mostraricon ?
-                            (
-                                <IoIosClose size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos();setProdutoId('') }} style={{ cursor: 'pointer', color: '#007bff' }} />
-                            ) : (
-                                <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
-                            )}
-                    </SearchBox>
-                </BoxHeaderButton>
+                <Box>
+                    <BoxHeaderButton>
+                        <Button  cor={'#5d46e2'} width={'200px'} onClick={() => { setOpenModal(true); setVizualizarModal('CriarProduto'); }}>Cadastrar Produto</Button>
+                        <SearchBox>
+                            <Input width={'200px'} type="text" placeholder="Pesquisar código do produto" value={produtoId} onChange={(e) => setProdutoId(e.target.value)} />
+                            {mostraricon ?
+                                (
+                                    <IoIosClose size={24} onClick={() => { setMostrarIcon(false); handleBuscarProdutos(); setProdutoId('') }} style={{ cursor: 'pointer', color: '#007bff' }} />
+                                ) : (
+                                    <MdSearch size={24} onClick={handleBuscarProduto} style={{ cursor: 'pointer', color: '#007bff' }} />
+                                )}
+                        </SearchBox>
+                    </BoxHeaderButton>
+                </Box>
 
                 <Table>
                     <thead>
@@ -144,8 +143,8 @@ export default function BuscarTodosProdutos() {
                                 <td>{produto.stock}</td>
                                 <td>
                                     <BoxEnd>
-                                            <MdDelete color={'#ff0000'} size={24} onClick={() => handleDeleteProduct(produto.id)} />
-                                            <MdEditSquare color={'#5d46e2'} size={24} onClick={() => handleEditProduct(produto)} />
+                                        <MdDelete color={'#ff0000'} size={24} onClick={() => handleDeleteProduct(produto.id)} />
+                                        <MdEditSquare color={'#5d46e2'} size={24} onClick={() => handleEditProduct(produto)} />
                                     </BoxEnd>
                                 </td>
                             </tr>
@@ -153,13 +152,13 @@ export default function BuscarTodosProdutos() {
                     </tbody>
                 </Table>
                 <BoxHeader>
-                    {produtos.length > 0 && 
-                    <Pagination
-                    currentPage={currentPage}
-                    totalPages={totalPages}
-                    onPageChange={handlePageChange}
-                    />
-                }
+                    {produtos.length > 0 &&
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handlePageChange}
+                        />
+                    }
                 </BoxHeader>
 
                 <Modal isOpen={openModal} setOpenModal={handleCloseModal} width={600}>

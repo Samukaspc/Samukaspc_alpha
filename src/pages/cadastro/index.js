@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Box, BoxButton, BoxStart, Container } from './styled';
+import { Box, BoxStart, Container } from './styled';
 import { useNavigate } from 'react-router-dom';
 import Alert from '../../component/alerta';
-import { register } from '../../service';
+import Input from '../../component/input';
+import Button from '../../component/button';
+import { registrar } from '../../service';
 
 export default function Cadastro() {
     const navigate = useNavigate();
@@ -42,7 +44,7 @@ export default function Cadastro() {
         }
 
         try {
-            await register(data);
+            await registrar(data);
             showAlert('success', 'Cadastro realizado com sucesso');
             event.target.reset();
             navigate('/')
@@ -61,25 +63,23 @@ export default function Cadastro() {
                 <Box>
                     <BoxStart>
                         <span>Nome completo</span>
-                        <input required id="name" name="name" type="text" placeholder="João da Silva" />
+                        <Input width={'300px'} required id="name" name="name" type="text" placeholder="João da Silva" />
                         <span>CPF ou CNPJ</span>
-                        <input required id="taxNumber" name="taxNumber" type="text" placeholder="12345678900" />
+                        <Input width={'300px'} required id="taxNumber" name="taxNumber" type="text" placeholder="12345678900" />
                         <span>Senha</span>
-                        <input required id="password" name="password" type="password" placeholder="*************" />
+                        <Input width={'300px'} required id="password" name="password" type="password" placeholder="*************" />
                     </BoxStart>
                     <BoxStart>
                         <span>Email</span>
-                        <input required id="mail" name="mail" type="email" placeholder="joao@gmail.com" />
+                        <Input width={'300px'} required id="mail" name="mail" type="email" placeholder="joao@gmail.com" />
                         <span>Telefone</span>
-                        <input required id="phone" name="phone" type="text" placeholder="(66)99999-9999" />
+                        <Input width={'300px'} required id="phone" name="phone" type="text" placeholder="(66)99999-9999" />
                         <span>Confirme a senha</span>
-                        <input required id="confirmPassword" name="confirmPassword" type="password" placeholder="*************" />
+                        <Input width={'300px'} required id="confirmPassword" name="confirmPassword" type="password" placeholder="*************" />
                     </BoxStart>
                 </Box>
-                <BoxButton>
-                    <button type="button" onClick={() => navigate('/')} >Voltar</button>
-                    <button type="submit">Cadastrar</button>
-                </BoxButton>
+                <Button width={'325px'} type={'submit'} onClick={() => navigate('/')} >Voltar</Button>
+                <Button width={'325px'} type={'submit'} >Cadastrar</Button>
             </form>
         </Container>
     );

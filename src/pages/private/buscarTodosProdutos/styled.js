@@ -27,28 +27,13 @@ export const Container = styled.div`
     max-width: 1400px;
     overflow: hidden;
     gap: 20px;
-    button {
-        background-color: #5d46e2;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        &:hover {
-            background-color: #888;
-        }
-    }
-   
     body {
         background-color: #f4f7f9;
     }
-
     h2 {
         text-align: center;
         color: #fff
     }
-    
-   
 `;
 
 export const BoxButtonEnd = styled.div`
@@ -60,13 +45,12 @@ export const BoxButtonEnd = styled.div`
     }
 `
 
-
 export const Table = styled.table`
     width: 100%;
     border-collapse: collapse;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-    
+    overflow: hidden;
     th, td {
         padding: 12px;
         text-align: center;
@@ -78,35 +62,28 @@ export const Table = styled.table`
             }
         }
     }
-    
     thead th {
         color: #ffffff;
         background-color: #5d46e2; 
         width: 100px;
     }
-
     tbody td {
         text-align: center;
         border: 1px solid #ddd;
     }
-
     tbody tr:nth-child(even) {
         background-color: #f0f8ff; 
     }
-
     tbody tr:nth-child(odd) {
         background-color: #ffffff;
     }
-
     tbody tr:hover {
         background-color: #e6f2ff; 
     }
-
     tbody tr:last-child td {
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
-
     @media (max-width: 800px) {
         display: block;
         overflow-x: auto;
@@ -131,32 +108,23 @@ export const BoxEnd = styled.div`
 `;
 export const SearchBox = styled.div`
     display: flex;
-    align-items: center;
+    align-items: end;
     position: relative;
-    input {
-        width: 100%;
-        border: none;
-        border-radius: 5px;
-        height: 20px;
-        width: 200px;
-        padding: 10px;
-        text-align: start;
-        &:focus {
-            outline: none;
-        }
-    }
-
     svg {
         position: absolute;
         right: 10px;
-        cursor: pointer;
-        color: #007bff;
+        top: 20px;
     }
 `;
+export const Box = styled.div`
+    display: flex;
+    width: 100%;
+`
 
 
 export const BoxHeaderButton = styled.div`
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     width: 100%;
     @media(max-width: 800px) {

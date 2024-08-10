@@ -11,27 +11,6 @@ export const Container = styled.div`
         text-decoration: none;
         color: blue;
     }
-    
-`
-export const BoxButton = styled.div`
-    margin-top: 20px;
-    
-    button {
-        padding: 10px;
-        margin: 5px;
-        background-color: #5d46e2;
-        color: #fff;
-        border: 1px solid #000;
-        border-radius: 10px;
-        border: none;
-        cursor: pointer;
-        width: 300px;
-        height: 40px;
-        justify-content: center;
-        &:hover {
-            background-color: #888;
-        }
-    }
 `
 
 export const Box = styled.div`
@@ -39,23 +18,17 @@ export const Box = styled.div`
     align-items: center;
     margin-top: 20px;
     gap: 10px;
-    input {
-        padding: 10px;
-        border: 1px solid #000;
-        border-radius: 5px;
-        width: 280px;
-    }
     justify-content: center;
     @media (max-width: 800px) {
         flex-direction: column;
     }
-    `
+`
 
 export const BoxStart = styled.div`
-display: flex;
-flex-direction: column;
-align-items: start;
-gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 10px;
 `
 export const AletaError = styled.div`
     display: flex;

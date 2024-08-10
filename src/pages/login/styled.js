@@ -6,8 +6,10 @@ export const Container = styled.div`
     height: 100vh;
     width: 100%;
     justify-content: center;
-`;
-
+    background-image: url(https://wallpapers.com/images/hd/clean-background-q9v7tw93md17jlti.jpg);
+    background-size: cover;
+    background-position: center top;
+`
 
 export const Box = styled.div`
     display: flex;
@@ -15,53 +17,22 @@ export const Box = styled.div`
     align-items: center;
     margin-top: 20px;
     gap: 10px;
-    input {
-        padding: 10px;
-        border: 1px solid #000;
-        border-radius: 5px;
-        width: 300px;
-    }
- 
-    
-`
-export const BoxButton = styled.div`
-    gap: 10px;
-    display: flex;
-    flex-direction: column;
-    button {
-        padding: 10px;
-        background-color: #0000ff ;
-        height: 40px;
-        color: #fff;
-        border: 1px solid #000;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        width: 325px;
-        justify-content: center;
-        &:hover {
-            background-color: #888;
-        }
-    }
-    a {
-        text-decoration: none;
-        color: blue;
-    }
 `
 
 export const BoxLogo = styled.div`
     display: flex;
     width: 100%;
     justify-content: center;
-  
 `
 
 export const BoxCadastro = styled.div`
     display: flex;
     flex-direction: column;
+    color: #626262;
     a {
+         margin-top : 5px ;
         text-decoration: none;
-        color: blue;
+        color: #0064ff;
     }
 `
 
@@ -70,5 +41,6 @@ export const BoxStart = styled.div`
     flex-direction: column;
     align-items: start;
     gap: 10px;
+    
 `
 

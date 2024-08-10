@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Box, BoxButton, BoxCadastro, BoxStart, Container } from './styled';
+import { Box, BoxCadastro, BoxStart, Container } from './styled';
 import logo from '../../image/login.png';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../../service';
 import Alert from '../../component/alerta';
+import Button from '../../component/button';
+import Input from '../../component/input';
 
 export default function Login() {
     const navigate = useNavigate();
@@ -41,25 +43,11 @@ export default function Login() {
                 <Box>
                     <BoxStart>
                         <span>Login</span>
-                        <input
-                            type="text"
-                            name="taxNumber"
-                            id="taxNumber"
-                            placeholder="Usuário"
-                            required
-                        />
+                        <Input width={'300px'} type="text" name="taxNumber" id="taxNumber" placeholder="Usuário" required />
                         <span>Senha</span>
-                        <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder="Senha"
-                            required
-                        />
+                        <Input width={'300px'} type="password" name="password" id="password" placeholder="Senha" required /> 
                     </BoxStart>
-                    <BoxButton>
-                        <button type="submit">Login</button>
-                    </BoxButton>
+                        <Button   width={'325px'} >Login</Button> 
                     <BoxCadastro>
                         <span>Ainda não possui cadastro?</span>
                         <a href="/cadastro">  Clique aqui e cadastre-se</a>
