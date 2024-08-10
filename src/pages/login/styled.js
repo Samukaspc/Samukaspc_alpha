@@ -30,7 +30,7 @@ export const BoxButton = styled.div`
     flex-direction: column;
     button {
         padding: 10px;
-        background-color: #5d46e2;
+        background-color: #0000ff ;
         height: 40px;
         color: #fff;
         border: 1px solid #000;
