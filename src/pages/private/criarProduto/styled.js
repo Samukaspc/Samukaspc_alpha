@@ -16,7 +16,6 @@ export const Box = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0;
     padding: 20px;
 `;
 
@@ -50,7 +49,6 @@ export const BoxInput = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 10px;
 `;
 
 export const BoxSpan = styled.div`

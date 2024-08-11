@@ -10,7 +10,6 @@ export const Container = styled.div`
 
 export const Box = styled.div`
     display: flex;
-    margin: 20px 0;
     padding: 20px;
 `;
 export const BoxStart = styled.div`
@@ -24,14 +23,6 @@ export const BoxStart = styled.div`
         border: 1px solid #ddd;
         border-radius: 5px;
         resize: vertical;
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    input[type="text"], input[type="number"] {
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
         width: 100%;
         box-sizing: border-box;
     }

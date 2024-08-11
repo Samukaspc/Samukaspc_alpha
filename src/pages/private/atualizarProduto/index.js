@@ -4,6 +4,8 @@ import { atualizarProduto } from '../../../service/produtoService';
 import Alert from '../../../component/alerta';
 import Button from '../../../component/button';
 import Input from '../../../component/input';
+import InputValue from '../../../component/inputValor';
+import { formatPreco } from '../../../utils/formatPrice';
 
 export default function AtualizarProduto({ dataProduto, onClose }) {
     const [buttonClicked, setButtonClicked] = useState('');
@@ -32,13 +34,6 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
         }
     };
 
-    const formatPreco = (event) => {
-        const input = event.target;
-        let value = parseFloat(input.value.replace(',', '.'));
-        if (!isNaN(value)) {
-            input.value = value.toFixed(2).replace('.', ',');
-        }
-    };
 
     useEffect(() => {
         if (dataProduto) {
@@ -65,7 +60,7 @@ export default function AtualizarProduto({ dataProduto, onClose }) {
                             <BoxSpan>
                                 <span>Preço</span>
                                 <BoxInput>
-                                    <Input required id="price" name="price" type="text" placeholder="Preço" step="0.01" min="0" onBlur={formatPreco} />
+                                    <InputValue required id="price" name="price" type="text" placeholder="Preço" step="0.01" min="0" onBlur={formatPreco} />
                                 </BoxInput>
                             </BoxSpan>
                             <BoxSpan>
