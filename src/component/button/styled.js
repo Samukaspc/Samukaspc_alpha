@@ -13,7 +13,7 @@ export const BoxButton = styled.div`
         justify-content: center;
         font-weight: bold;
         &:hover {
-            background-color: #014bbd;
+            background-color: ${props => props.corSecundario ? props.corSecundario : '#014bbd'};
         }
         @media(max-width: 768px) {
             width: 100%;

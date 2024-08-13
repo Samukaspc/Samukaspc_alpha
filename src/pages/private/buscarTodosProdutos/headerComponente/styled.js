@@ -43,9 +43,6 @@ export  const HeaderTitulo = styled.div`
         h2 {
             font-size: 15px;
         }
-        button {
-            padding: 5px 10px;
-        }
     }
    
 `

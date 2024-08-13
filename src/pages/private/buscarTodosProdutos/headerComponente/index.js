@@ -15,7 +15,7 @@ export default function HeaderComponente() {
                     </HeaderLogo>
                     <HeaderTitulo>
                         <h2>Tabela de produtos</h2>
-                        <Button cor={'#fff'} width={'80px'} onClick={desconectarUsuario} >
+                        <Button cor={'#fff'} corSecundario={'#add8e6'} width={'80px'} onClick={desconectarUsuario} >
                             <BoxIcon>
                                 <ImExit color="#5d46e2" />
                                 <span>Sair</span>

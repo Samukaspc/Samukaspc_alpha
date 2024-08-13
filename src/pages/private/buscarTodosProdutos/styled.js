@@ -107,6 +107,7 @@ export const BoxEnd = styled.div`
     justify-content: center;
     svg {
         margin: 0 5px;
+        cursor: pointer;
     }
     .sc-eytLVj {
         margin-bottom: 20px;
